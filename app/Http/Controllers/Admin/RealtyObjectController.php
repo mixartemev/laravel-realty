@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Building;
+use App\Floor;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Traits\MediaUploadingTrait;
 use App\Http\Requests\MassDestroyRealtyObjectRequest;
@@ -30,9 +30,9 @@ class RealtyObjectController extends Controller
 
         $users = User::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $buildings = Building::all()->pluck('address', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $floors = Floor::all()->pluck('number', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        return view('admin.realtyObjects.create', compact('users', 'buildings'));
+        return view('admin.realtyObjects.create', compact('users', 'floors'));
     }
 
     public function store(StoreRealtyObjectRequest $request)
@@ -58,11 +58,11 @@ class RealtyObjectController extends Controller
 
         $users = User::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $buildings = Building::all()->pluck('address', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $floors = Floor::all()->pluck('number', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $realtyObject->load('user', 'building');
+        $realtyObject->load('user', 'floor');
 
-        return view('admin.realtyObjects.edit', compact('users', 'buildings', 'realtyObject'));
+        return view('admin.realtyObjects.edit', compact('users', 'floors', 'realtyObject'));
     }
 
     public function update(UpdateRealtyObjectRequest $request, RealtyObject $realtyObject)
@@ -110,7 +110,7 @@ class RealtyObjectController extends Controller
     {
         abort_unless(\Gate::allows('realty_object_show'), 403);
 
-        $realtyObject->load('user', 'building');
+        $realtyObject->load('user', 'floor');
 
         return view('admin.realtyObjects.show', compact('realtyObject'));
     }

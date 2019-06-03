@@ -23,10 +23,6 @@ class StoreRealtyObjectRequest extends FormRequest
                 'date_format:' . config('panel.date_format'),
                 'nullable',
             ],
-            'building_id'     => [
-                'required',
-                'integer',
-            ],
             'cadastral_numb'  => [
                 'max:255',
             ],
@@ -38,6 +34,10 @@ class StoreRealtyObjectRequest extends FormRequest
             ],
             'commission'      => [
                 'max:500',
+            ],
+            'floor_id'        => [
+                'required',
+                'integer',
             ],
         ];
     }
