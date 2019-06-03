@@ -13,9 +13,8 @@ class CreateRealtyObjectsTable extends Migration
             $table->date('planned_contact')->nullable();
             $table->string('cadastral_numb')->nullable();
             $table->float('area', 4, 1);
-            $table->integer('floor')->nullable();
             $table->integer('power')->nullable();
-            $table->float('ceiling', 2, 4)->nullable();
+            $table->float('ceiling', 4, 2)->nullable();
             $table->string('contract_status');
             $table->float('commission', 4, 1)->nullable();
             $table->longText('description')->nullable();

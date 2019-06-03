@@ -26,16 +26,10 @@
                             {{ trans('cruds.realtyObject.fields.user') }}
                         </th>
                         <th>
-                            {{ trans('cruds.realtyObject.fields.building') }}
-                        </th>
-                        <th>
                             {{ trans('cruds.realtyObject.fields.cadastral_numb') }}
                         </th>
                         <th>
                             {{ trans('cruds.realtyObject.fields.area') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.realtyObject.fields.floor') }}
                         </th>
                         <th>
                             {{ trans('cruds.realtyObject.fields.commission') }}
@@ -45,6 +39,9 @@
                         </th>
                         <th>
                             {{ trans('cruds.realtyObject.fields.cost_m') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.realtyObject.fields.floor') }}
                         </th>
                         <th>
                             &nbsp;
@@ -61,16 +58,10 @@
                                 {{ $realtyObject->user->name ?? '' }}
                             </td>
                             <td>
-                                {{ $realtyObject->building->address ?? '' }}
-                            </td>
-                            <td>
                                 {{ $realtyObject->cadastral_numb ?? '' }}
                             </td>
                             <td>
                                 {{ $realtyObject->area ?? '' }}
-                            </td>
-                            <td>
-                                {{ $realtyObject->floor ?? '' }}
                             </td>
                             <td>
                                 {{ $realtyObject->commission ?? '' }}
@@ -80,6 +71,9 @@
                             </td>
                             <td>
                                 {{ $realtyObject->cost_m ?? '' }}
+                            </td>
+                            <td>
+                                {{ $realtyObject->floor->number ?? '' }}
                             </td>
                             <td>
                                 @can('realty_object_show')

@@ -34,19 +34,6 @@
                     {{ trans('cruds.realtyObject.fields.planned_contact_helper') }}
                 </p>
             </div>
-            <div class="form-group {{ $errors->has('building_id') ? 'has-error' : '' }}">
-                <label for="building">{{ trans('cruds.realtyObject.fields.building') }}*</label>
-                <select name="building_id" id="building" class="form-control select2" required>
-                    @foreach($buildings as $id => $building)
-                        <option value="{{ $id }}" {{ (isset($realtyObject) && $realtyObject->building ? $realtyObject->building->id : old('building_id')) == $id ? 'selected' : '' }}>{{ $building }}</option>
-                    @endforeach
-                </select>
-                @if($errors->has('building_id'))
-                    <p class="help-block">
-                        {{ $errors->first('building_id') }}
-                    </p>
-                @endif
-            </div>
             <div class="form-group {{ $errors->has('cadastral_numb') ? 'has-error' : '' }}">
                 <label for="cadastral_numb">{{ trans('cruds.realtyObject.fields.cadastral_numb') }}</label>
                 <input type="text" id="cadastral_numb" name="cadastral_numb" class="form-control" value="{{ old('cadastral_numb', isset($realtyObject) ? $realtyObject->cadastral_numb : '') }}">
@@ -71,18 +58,6 @@
                     {{ trans('cruds.realtyObject.fields.area_helper') }}
                 </p>
             </div>
-            <div class="form-group {{ $errors->has('floor') ? 'has-error' : '' }}">
-                <label for="floor">{{ trans('cruds.realtyObject.fields.floor') }}</label>
-                <input type="number" id="floor" name="floor" class="form-control" value="{{ old('floor', isset($realtyObject) ? $realtyObject->floor : '') }}" step="1">
-                @if($errors->has('floor'))
-                    <p class="help-block">
-                        {{ $errors->first('floor') }}
-                    </p>
-                @endif
-                <p class="helper-block">
-                    {{ trans('cruds.realtyObject.fields.floor_helper') }}
-                </p>
-            </div>
             <div class="form-group {{ $errors->has('power') ? 'has-error' : '' }}">
                 <label for="power">{{ trans('cruds.realtyObject.fields.power') }}</label>
                 <input type="number" id="power" name="power" class="form-control" value="{{ old('power', isset($realtyObject) ? $realtyObject->power : '') }}" step="1">
@@ -97,7 +72,7 @@
             </div>
             <div class="form-group {{ $errors->has('ceiling') ? 'has-error' : '' }}">
                 <label for="ceiling">{{ trans('cruds.realtyObject.fields.ceiling') }}</label>
-                <input type="number" id="ceiling" name="ceiling" class="form-control" value="{{ old('ceiling', isset($realtyObject) ? $realtyObject->ceiling : '') }}" step="0.0001">
+                <input type="number" id="ceiling" name="ceiling" class="form-control" value="{{ old('ceiling', isset($realtyObject) ? $realtyObject->ceiling : '') }}" step="0.01">
                 @if($errors->has('ceiling'))
                     <p class="help-block">
                         {{ $errors->first('ceiling') }}
@@ -196,6 +171,19 @@
                 <p class="helper-block">
                     {{ trans('cruds.realtyObject.fields.docs_helper') }}
                 </p>
+            </div>
+            <div class="form-group {{ $errors->has('floor_id') ? 'has-error' : '' }}">
+                <label for="floor">{{ trans('cruds.realtyObject.fields.floor') }}*</label>
+                <select name="floor_id" id="floor" class="form-control select2" required>
+                    @foreach($floors as $id => $floor)
+                        <option value="{{ $id }}" {{ (isset($realtyObject) && $realtyObject->floor ? $realtyObject->floor->id : old('floor_id')) == $id ? 'selected' : '' }}>{{ $floor }}</option>
+                    @endforeach
+                </select>
+                @if($errors->has('floor_id'))
+                    <p class="help-block">
+                        {{ $errors->first('floor_id') }}
+                    </p>
+                @endif
             </div>
             <div>
                 <input class="btn btn-danger" type="submit" value="{{ trans('global.save') }}">

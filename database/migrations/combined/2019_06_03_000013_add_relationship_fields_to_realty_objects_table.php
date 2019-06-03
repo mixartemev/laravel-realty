@@ -11,8 +11,8 @@ class AddRelationshipFieldsToRealtyObjectsTable extends Migration
         Schema::table('realty_objects', function (Blueprint $table) {
             $table->unsignedInteger('user_id');
             $table->foreign('user_id', 'user_fk_89470')->references('id')->on('users');
-            $table->unsignedInteger('building_id');
-            $table->foreign('building_id', 'building_fk_89472')->references('id')->on('buildings');
+            $table->unsignedInteger('floor_id');
+            $table->foreign('floor_id', 'floor_fk_89646')->references('id')->on('floors');
         });
     }
 }

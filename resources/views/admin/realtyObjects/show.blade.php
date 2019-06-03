@@ -28,14 +28,6 @@
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.realtyObject.fields.building') }}
-                        </th>
-                        <td>
-                            {{ $realtyObject->building->address ?? '' }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
                             {{ trans('cruds.realtyObject.fields.cadastral_numb') }}
                         </th>
                         <td>
@@ -48,14 +40,6 @@
                         </th>
                         <td>
                             {{ $realtyObject->area }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.realtyObject.fields.floor') }}
-                        </th>
-                        <td>
-                            {{ $realtyObject->floor }}
                         </td>
                     </tr>
                     <tr>
@@ -125,6 +109,14 @@
                         </th>
                         <td>
                             {{ $realtyObject->docs }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.realtyObject.fields.floor') }}
+                        </th>
+                        <td>
+                            {{ $realtyObject->floor->number ?? '' }}
                         </td>
                     </tr>
                 </tbody>

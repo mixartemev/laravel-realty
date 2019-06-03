@@ -29,16 +29,15 @@ class RealtyObject extends Model implements HasMedia
     protected $fillable = [
         'area',
         'cost',
-        'floor',
         'power',
         'cost_m',
         'user_id',
         'ceiling',
+        'floor_id',
         'commission',
         'created_at',
         'updated_at',
         'deleted_at',
-        'building_id',
         'description',
         'cadastral_numb',
         'planned_contact',
@@ -60,11 +59,6 @@ class RealtyObject extends Model implements HasMedia
         $this->attributes['planned_contact'] = $value ? Carbon::createFromFormat(config('panel.date_format'), $value)->format('Y-m-d') : null;
     }
 
-    public function building()
-    {
-        return $this->belongsTo(Building::class, 'building_id');
-    }
-
     public function getphotosAttribute()
     {
         $files = $this->getMedia('photos');
@@ -79,5 +73,10 @@ class RealtyObject extends Model implements HasMedia
     public function getdocsAttribute()
     {
         return $this->getMedia('docs');
+    }
+
+    public function floor()
+    {
+        return $this->belongsTo(Floor::class, 'floor_id');
     }
 }
