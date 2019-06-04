@@ -3,7 +3,7 @@
     <a href="#" class="brand-link">
         <div class="nav-link">
             <i class="fas fa-spa">
-                <span class="brand-text font-weight-light "> INV</span>
+                <span class="brand-text font-weight-light "></span>
             </i>
             <span class="brand-text font-weight-light">{{ trans('panel.site_title') }}</span>
         </div>
