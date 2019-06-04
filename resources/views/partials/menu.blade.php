@@ -128,7 +128,7 @@
                             @can('floor_access')
                                 <li class="nav-item">
                                     <a href="{{ route("admin.floors.index") }}" class="nav-link {{ request()->is('admin/floors') || request()->is('admin/floors/*') ? 'active' : '' }}">
-                                        <i class="fas fa-cogs">
+                                        <i class="fas fa-stream">
 
                                         </i>
                                         <p>
@@ -143,7 +143,7 @@
                 @can('realty_object_access')
                     <li class="nav-item has-treeview {{ request()->is('admin/realty-objects*') ? 'menu-open' : '' }}">
                         <a class="nav-link nav-dropdown-toggle">
-                            <i class="fas fa-hospital-alt">
+                            <i class="fas fa-home">
 
                             </i>
                             <p>
@@ -155,7 +155,7 @@
                             @can('realty_object_access')
                                 <li class="nav-item">
                                     <a href="{{ route("admin.realty-objects.index") }}" class="nav-link {{ request()->is('admin/realty-objects') || request()->is('admin/realty-objects/*') ? 'active' : '' }}">
-                                        <i class="fas fa-home">
+                                        <i class="fab fa-buromobelexperte">
 
                                         </i>
                                         <p>
