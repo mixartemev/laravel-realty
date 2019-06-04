@@ -1,7 +1,12 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4" style="min-height: 917px;">
     <!-- Brand Logo -->
     <a href="#" class="brand-link">
-        <span class="brand-text font-weight-light">{{ trans('panel.site_title') }}</span>
+        <div class="nav-link">
+            <i class="fas fa-spa">
+                <span class="brand-text font-weight-light "> INV</span>
+            </i>
+            <span class="brand-text font-weight-light">{{ trans('panel.site_title') }}</span>
+        </div>
     </a>
 
     <!-- Sidebar -->
