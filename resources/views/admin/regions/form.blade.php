@@ -13,7 +13,7 @@
 <div class="form-group {{ $errors->has('is_moscow') ? 'has-error' : '' }}">
     <label for="is_moscow">{{ trans('cruds.region.fields.is_moscow') }}*</label>
     <input name="is_moscow" type="hidden" value="0">
-    <input value="1" type="checkbox" id="is_moscow" name="is_moscow" {{ (isset($region) && $region->is_moscow) || old('is_moscow', 0) === 1 ? 'checked' : '' }} required>
+    <input value="1" type="checkbox" id="is_moscow" name="is_moscow" {{ (isset($region) && $region->is_moscow) || old('is_moscow', 0) === 1 ? 'checked' : '' }}>
     @if($errors->has('is_moscow'))
         <p class="help-block">
             {{ $errors->first('is_moscow') }}
