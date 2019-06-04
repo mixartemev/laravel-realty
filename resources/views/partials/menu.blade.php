@@ -1,6 +1,6 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4" style="min-height: 917px;">
     <!-- Brand Logo -->
-    <a href="#" class="brand-link">
+    <a href="{{ route("admin.home") }}" class="brand-link">
         <div class="px-3">
             <i class="fas fa-spa">
                 <span class="brand-text font-weight-light "></span>
@@ -16,16 +16,6 @@
         <!-- Sidebar Menu -->
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                <li class="nav-item">
-                    <a href="{{ route("admin.home") }}" class="nav-link">
-                        <p>
-                            <i class="fas fa-tachometer-alt">
-
-                            </i>
-                            <span>{{ trans('global.dashboard') }}</span>
-                        </p>
-                    </a>
-                </li>
                 @can('user_management_access')
                     <li class="nav-item has-treeview {{ request()->is('admin/permissions*') ? 'menu-open' : '' }} {{ request()->is('admin/roles*') ? 'menu-open' : '' }} {{ request()->is('admin/users*') ? 'menu-open' : '' }}">
                         <a class="nav-link nav-dropdown-toggle">
