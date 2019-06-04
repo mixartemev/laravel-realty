@@ -15,13 +15,10 @@ class UpdateRegionRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'      => [
+            'name' => [
                 'required',
                 'min:2',
                 'max:255',
-            ],
-            'is_moscow' => [
-                'required',
             ],
         ];
     }
