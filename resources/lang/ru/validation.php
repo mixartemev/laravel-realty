@@ -8,6 +8,7 @@ return [
     'alpha'                => 'Поле :attribute может содержать только буквы',
     'alpha_dash'           => 'Поле :attribute может содержать только буквы, цифры и тире',
     'alpha_num'            => 'Поле :attribute может содержать только буквы и цифры',
+    'latin'                => 'The :attribute may only contain ISO basic Latin alphabet letters.',
     'array'                => 'Поле :attribute должно быть массивом',
     'before'               => 'Поле :attribute должно соответствовать дате идущей до даты :date.',
     'before_or_equal'      => 'Поле :attribute должно соответствовать дате, равной или идущей до даты :date.',

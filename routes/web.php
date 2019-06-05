@@ -42,4 +42,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::resource('realty-objects', 'RealtyObjectController');
 
     Route::post('realty-objects/media', 'RealtyObjectController@storeMedia')->name('realty-objects.storeMedia');
+
+    Route::delete('audit-logs/destroy', 'AuditLogsController@massDestroy')->name('audit-logs.massDestroy');
+
+    Route::resource('audit-logs', 'AuditLogsController', ['except' => ['create', 'store', 'edit', 'update', 'destroy']]);
 });
