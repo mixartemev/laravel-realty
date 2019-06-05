@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'add'                                  => 'Добавить новый',
+    'add'                                  => 'Добавить',
     'create'                               => 'Создать',
     'list'                                 => 'Список',
     'show'                                 => 'Показать',
@@ -11,13 +11,13 @@ return [
     'edit'                                 => 'Редактировать',
     'delete'                               => 'Удалить',
     'save'                                 => 'Сохранить',
-    'pleaseSelect'                         => 'Пожалуйста, сделайте выбор',
+    'pleaseSelect'                         => 'Выберите',
     'areYouSure'                           => 'Вы уверены?',
     'allRightsReserved'                    => 'Все права защищены.',
     'downloadFile'                         => 'Скачать файл',
     'toggleNavigation'                     => 'Toggle navigation',
     'home'                                 => 'Home',
-    'youAreLoggedIn'                       => 'Вы вошли в систему !',
+    'youAreLoggedIn'                       => 'Вы вошли в систему!',
     'user_name'                            => 'Имя',
     'reset_password'                       => 'Сброс пароля',
     'login'                                => 'Войти',
