@@ -15,91 +15,39 @@
     </div>
 
     <div class="card-body">
-        <div class="table-responsive">
-            <table class=" table table-bordered table-striped table-hover datatable">
-                <thead>
-                    <tr>
-                        <th width="10">
+        <table class=" table table-bordered table-striped table-hover ajaxTable datatable">
+            <thead>
+                <tr>
+                    <th width="10">
 
-                        </th>
-                        <th>
-                            {{ trans('cruds.realtyObject.fields.user') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.realtyObject.fields.cadastral_numb') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.realtyObject.fields.area') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.realtyObject.fields.commission') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.realtyObject.fields.cost') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.realtyObject.fields.cost_m') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.realtyObject.fields.floor') }}
-                        </th>
-                        <th>
-                            &nbsp;
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach($realtyObjects as $key => $realtyObject)
-                        <tr data-entry-id="{{ $realtyObject->id }}">
-                            <td>
-
-                            </td>
-                            <td>
-                                {{ $realtyObject->user->name ?? '' }}
-                            </td>
-                            <td>
-                                {{ $realtyObject->cadastral_numb ?? '' }}
-                            </td>
-                            <td>
-                                {{ $realtyObject->area ?? '' }}
-                            </td>
-                            <td>
-                                {{ $realtyObject->commission ?? '' }}
-                            </td>
-                            <td>
-                                {{ $realtyObject->cost ?? '' }}
-                            </td>
-                            <td>
-                                {{ $realtyObject->cost_m ?? '' }}
-                            </td>
-                            <td>
-                                {{ $realtyObject->floor->number ?? '' }}
-                            </td>
-                            <td>
-                                @can('realty_object_show')
-                                    <a class="btn btn-xs btn-primary" href="{{ route('admin.realty-objects.show', $realtyObject->id) }}">
-                                        {{ trans('global.view') }}
-                                    </a>
-                                @endcan
-                                @can('realty_object_edit')
-                                    <a class="btn btn-xs btn-info" href="{{ route('admin.realty-objects.edit', $realtyObject->id) }}">
-                                        {{ trans('global.edit') }}
-                                    </a>
-                                @endcan
-                                @can('realty_object_delete')
-                                    <form action="{{ route('admin.realty-objects.destroy', $realtyObject->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
-                                        <input type="hidden" name="_method" value="DELETE">
-                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                        <input type="submit" class="btn btn-xs btn-danger" value="{{ trans('global.delete') }}">
-                                    </form>
-                                @endcan
-                            </td>
-
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        </div>
+                    </th>
+                    <th>
+                        {{ trans('cruds.realtyObject.fields.user') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.realtyObject.fields.cadastral_numb') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.realtyObject.fields.area') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.realtyObject.fields.commission') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.realtyObject.fields.cost') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.realtyObject.fields.cost_m') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.realtyObject.fields.floor') }}
+                    </th>
+                    <th>
+                        &nbsp;
+                    </th>
+                </tr>
+            </thead>
+        </table>
     </div>
 </div>
 @endsection
@@ -107,14 +55,14 @@
 @parent
 <script>
     $(function () {
-  let deleteButtonTrans = '{{ trans('global.datatables.delete') }}'
+  let deleteButtonTrans = '{{ trans('global.datatables.delete') }}';
   let deleteButton = {
     text: deleteButtonTrans,
     url: "{{ route('admin.realty-objects.massDestroy') }}",
     className: 'btn-danger',
     action: function (e, dt, node, config) {
-      var ids = $.map(dt.rows({ selected: true }).nodes(), function (entry) {
-          return $(entry).data('entry-id')
+      var ids = $.map(dt.rows({ selected: true }).data(), function (entry) {
+          return entry.id
       });
 
       if (ids.length === 0) {
@@ -133,13 +81,35 @@
       }
     }
   }
+
   let dtButtons = $.extend(true, [], $.fn.dataTable.defaults.buttons)
 @can('realty_object_delete')
   dtButtons.push(deleteButton)
 @endcan
 
-  $('.datatable:not(.ajaxTable)').DataTable({ buttons: dtButtons })
-})
+  let dtOverrideGlobals = {
+    buttons: dtButtons,
+    processing: true,
+    serverSide: true,
+    retrieve: true,
+    aaSorting: [],
+    ajax: "{{ route('admin.realty-objects.index') }}",
+    columns: [
+      { data: 'placeholder', name: 'placeholder' },
+      { data: 'user.user', name: 'user.name' },
+{ data: 'cadastral_numb', name: 'cadastral_numb' },
+{ data: 'area', name: 'area' },
+{ data: 'commission', name: 'commission' },
+{ data: 'cost', name: 'cost' },
+{ data: 'cost_m', name: 'cost_m' },
+{ data: 'floor.floor', name: 'floor.number' },
+{ data: 'actions', name: '{{ trans('global.actions') }}' }
+    ],
+  };
+
+  $('.datatable').DataTable(dtOverrideGlobals);
+
+});
 
 </script>
 @endsection

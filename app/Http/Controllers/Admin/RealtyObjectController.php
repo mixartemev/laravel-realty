@@ -10,18 +10,64 @@ use App\Http\Requests\StoreRealtyObjectRequest;
 use App\Http\Requests\UpdateRealtyObjectRequest;
 use App\RealtyObject;
 use App\User;
+use Illuminate\Http\Request;
+use Yajra\DataTables\Facades\DataTables;
 
 class RealtyObjectController extends Controller
 {
     use MediaUploadingTrait;
 
-    public function index()
+    public function index(Request $request)
     {
-        abort_unless(\Gate::allows('realty_object_access'), 403);
+        if ($request->ajax()) {
+            $query = RealtyObject::query();
+            $query->with(['user', 'floor']);
+            $table = Datatables::of($query);
 
-        $realtyObjects = RealtyObject::all();
+            $table->addColumn('placeholder', '&nbsp;');
+            $table->addColumn('actions', '&nbsp;');
 
-        return view('admin.realtyObjects.index', compact('realtyObjects'));
+            $table->editColumn('actions', function ($row) {
+                $viewGate      = 'realty_object_show';
+                $editGate      = 'realty_object_edit';
+                $deleteGate    = 'realty_object_delete';
+                $crudRoutePart = 'realty-objects';
+
+                return view('partials.datatablesActions', compact(
+                    'viewGate',
+                    'editGate',
+                    'deleteGate',
+                    'crudRoutePart',
+                    'row'
+                ));
+            });
+            $table->editColumn('user.user', function ($row) {
+                return $row->user_id ? $row->user->name : '';
+            });
+            $table->editColumn('cadastral_numb', function ($row) {
+                return $row->cadastral_numb ? $row->cadastral_numb : "";
+            });
+            $table->editColumn('area', function ($row) {
+                return $row->area ? $row->area : "";
+            });
+            $table->editColumn('commission', function ($row) {
+                return $row->commission ? $row->commission : "";
+            });
+            $table->editColumn('cost', function ($row) {
+                return $row->cost ? $row->cost : "";
+            });
+            $table->editColumn('cost_m', function ($row) {
+                return $row->cost_m ? $row->cost_m : "";
+            });
+            $table->editColumn('floor.floor', function ($row) {
+                return $row->floor_id ? $row->floor->number : '';
+            });
+            $table->rawColumns(['actions', 'placeholder', 'user', 'floor']);
+
+            return $table->make(true);
+        }
+
+        return view('admin.realtyObjects.index');
     }
 
     public function create()
