@@ -8,16 +8,53 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\MassDestroyFloorRequest;
 use App\Http\Requests\StoreFloorRequest;
 use App\Http\Requests\UpdateFloorRequest;
+use Illuminate\Http\Request;
+use Yajra\DataTables\Facades\DataTables;
 
 class FloorController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        abort_unless(\Gate::allows('floor_access'), 403);
+        if ($request->ajax()) {
+            $query = Floor::query();
+            $query->with(['building']);
+            $table = Datatables::of($query);
 
-        $floors = Floor::all();
+            $table->addColumn('placeholder', '&nbsp;');
+            $table->addColumn('actions', '&nbsp;');
 
-        return view('admin.floors.index', compact('floors'));
+            $table->editColumn('actions', function ($row) {
+                $viewGate      = 'floor_show';
+                $editGate      = 'floor_edit';
+                $deleteGate    = 'floor_delete';
+                $crudRoutePart = 'floors';
+
+                return view('partials.datatablesActions', compact(
+                    'viewGate',
+                    'editGate',
+                    'deleteGate',
+                    'crudRoutePart',
+                    'row'
+                ));
+            });
+            $table->editColumn('number', function ($row) {
+                return $row->number ? $row->number : "";
+            });
+            $table->editColumn('area', function ($row) {
+                return $row->area ? $row->area : "";
+            });
+            $table->editColumn('ceiling', function ($row) {
+                return $row->ceiling ? $row->ceiling : "";
+            });
+            $table->editColumn('building.building', function ($row) {
+                return $row->building_id ? $row->building->address : '';
+            });
+            $table->rawColumns(['actions', 'placeholder', 'building']);
+
+            return $table->make(true);
+        }
+
+        return view('admin.floors.index');
     }
 
     public function create()

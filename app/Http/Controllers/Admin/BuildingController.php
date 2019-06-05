@@ -9,16 +9,59 @@ use App\Http\Requests\StoreBuildingRequest;
 use App\Http\Requests\UpdateBuildingRequest;
 use App\MetroStation;
 use App\Region;
+use Illuminate\Http\Request;
+use Yajra\DataTables\Facades\DataTables;
 
 class BuildingController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        abort_unless(\Gate::allows('building_access'), 403);
+        if ($request->ajax()) {
+            $query = Building::query();
+            $query->with(['region', 'metro_station']);
+            $table = Datatables::of($query);
 
-        $buildings = Building::all();
+            $table->addColumn('placeholder', '&nbsp;');
+            $table->addColumn('actions', '&nbsp;');
 
-        return view('admin.buildings.index', compact('buildings'));
+            $table->editColumn('actions', function ($row) {
+                $viewGate      = 'building_show';
+                $editGate      = 'building_edit';
+                $deleteGate    = 'building_delete';
+                $crudRoutePart = 'buildings';
+
+                return view('partials.datatablesActions', compact(
+                    'viewGate',
+                    'editGate',
+                    'deleteGate',
+                    'crudRoutePart',
+                    'row'
+                ));
+            });
+            $table->editColumn('address', function ($row) {
+                return $row->address ? $row->address : "";
+            });
+            $table->editColumn('region.region', function ($row) {
+                return $row->region_id ? $row->region->name : '';
+            });
+            $table->editColumn('region.is_moscow', function ($row) {
+                return $row->region_id ? $row->region->is_moscow : '';
+            });
+            $table->editColumn('metroStation.metro_station', function ($row) {
+                return $row->metro_station_id ? $row->metro_station->name : '';
+            });
+            $table->editColumn('type', function ($row) {
+                return $row->type ? Building::TYPE_SELECT[$row->type] : '';
+            });
+            $table->editColumn('profile', function ($row) {
+                return $row->profile ? Building::PROFILE_SELECT[$row->profile] : '';
+            });
+            $table->rawColumns(['actions', 'placeholder', 'region', 'metro_station']);
+
+            return $table->make(true);
+        }
+
+        return view('admin.buildings.index');
     }
 
     public function create()
