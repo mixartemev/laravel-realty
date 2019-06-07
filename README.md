@@ -8,5 +8,5 @@ cp .env.example .env
 # configure your .env
 php artisan key:generate
 php artisan storage:link
-php artisan migrate:fresh --seed --path=database/migrations/combined
+php artisan migrate:fresh --seed
 ```
