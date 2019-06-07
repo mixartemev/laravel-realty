@@ -44,7 +44,7 @@ return [
     'month'                                => 'Месяц',
     'logout'                               => 'Выйти',
     'systemCalendar'                       => 'Calendar',
-    'dashboard'                            => 'Панель управления',
+    'dashboard'                            => 'Статистика',
     'datatables'                           => [
         'copy'          => 'Скопировать',
         'csv'           => 'CSV',

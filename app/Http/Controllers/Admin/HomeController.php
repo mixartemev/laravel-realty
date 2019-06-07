@@ -18,54 +18,29 @@ class HomeController
             'aggregate_function'    => 'count',
             'filter_field'          => 'created_at',
             'group_by_field_format' => 'd.m.Y H:i:s',
-            'column_class'          => 'col-md-12',
+            'column_class'          => 'col-md-8',
             'entries_number'        => '5',
         ];
+        $objectsCountLineChart = new LaravelChart($settings1);
 
-        $chart1 = new LaravelChart($settings1);
-
-        $settings2 = [
-            'chart_title'           => 'Количество сотрудников',
-            'chart_type'            => 'number_block',
+        $settings6 = [
+            'chart_title'           => 'Этажность',
+            'chart_type'            => 'pie',
             'report_type'           => 'group_by_date',
-            'model'                 => 'App\\User',
-            'group_by_field'        => 'email_verified_at',
+            'model'                 => 'App\\Floor',
+            'group_by_field'        => 'created_at',
             'group_by_period'       => 'day',
             'aggregate_function'    => 'count',
             'filter_field'          => 'created_at',
             'group_by_field_format' => 'd.m.Y H:i:s',
-            'column_class'          => 'col-md-3',
+            'column_class'          => 'col-md-4',
             'entries_number'        => '5',
         ];
 
-        $settings2['total_number'] = $settings2['model']::when(isset($settings2['filter_field']), function ($query) use ($settings2) {
-            if (isset($settings2['filter_days'])) {
-                return $query->where(
-                    $settings2['filter_field'],
-                    '>=',
-                    now()->subDays($settings2['filter_days'])->format('Y-m-d')
-                );
-            } else if (isset($settings2['filter_period'])) {
-                switch ($settings2['filter_period']) {
-                    case 'week':
-                        $start  = date('Y-m-d', strtotime('last Monday'));
-                        break;
-                    case 'month':
-                        $start = date('Y-m') . '-01';
-                        break;
-                    case 'year':
-                        $start  = date('Y') . '-01-01';
-                        break;
-                }
+        $floorsPieChart = new LaravelChart($settings6);
 
-                if (isset($start)) {
-                    return $query->where($settings2['filter_field'], '>=', $start);
-                }
-            }
-        })
-            ->{$settings2['aggregate_function'] ?? 'count'}($settings2['aggregate_field'] ?? '*');
 
-        $settings3 = [
+        $lastObjects = [
             'chart_title'           => 'Последние 10 объектов этого месяца',
             'chart_type'            => 'latest_entries',
             'report_type'           => 'group_by_date',
@@ -90,10 +65,10 @@ class HomeController
                 '8' => 'floor',
             ],
         ];
-
-        $settings3['data'] = $settings3['model']::latest()
-            ->take($settings3['entries_number'])
+        $lastObjects['data'] = $lastObjects['model']::latest()
+            ->take($lastObjects['entries_number'])
             ->get();
+
 
         $settings4 = [
             'chart_title'        => 'Региональность',
@@ -106,8 +81,7 @@ class HomeController
             'column_class'       => 'col-md-4',
             'entries_number'     => '5',
         ];
-
-        $chart4 = new LaravelChart($settings4);
+        $regionsPieChart = new LaravelChart($settings4);
 
         $settings5 = [
             'chart_title'        => 'Метрошность',
@@ -120,15 +94,14 @@ class HomeController
             'column_class'       => 'col-md-4',
             'entries_number'     => '5',
         ];
+        $metroBarChart = new LaravelChart($settings5);
 
-        $chart5 = new LaravelChart($settings5);
-
-        $settings6 = [
-            'chart_title'           => 'Этажность',
-            'chart_type'            => 'pie',
+        $usersCount = [
+            'chart_title'           => 'Количество сотрудников',
+            'chart_type'            => 'number_block',
             'report_type'           => 'group_by_date',
-            'model'                 => 'App\\Floor',
-            'group_by_field'        => 'created_at',
+            'model'                 => 'App\\User',
+            'group_by_field'        => 'email_verified_at',
             'group_by_period'       => 'day',
             'aggregate_function'    => 'count',
             'filter_field'          => 'created_at',
@@ -137,8 +110,33 @@ class HomeController
             'entries_number'        => '5',
         ];
 
-        $chart6 = new LaravelChart($settings6);
+        $usersCount['total_number'] = $usersCount['model']::when(isset($usersCount['filter_field']), function ($query) use ($usersCount) {
+            if (isset($usersCount['filter_days'])) {
+                return $query->where(
+                    $usersCount['filter_field'],
+                    '>=',
+                    now()->subDays($usersCount['filter_days'])->format('Y-m-d')
+                );
+            } else if (isset($usersCount['filter_period'])) {
+                switch ($usersCount['filter_period']) {
+                    case 'week':
+                        $start  = date('Y-m-d', strtotime('last Monday'));
+                        break;
+                    case 'month':
+                        $start = date('Y-m') . '-01';
+                        break;
+                    case 'year':
+                        $start  = date('Y') . '-01-01';
+                        break;
+                }
 
-        return view('home', compact('chart1', 'settings2', 'settings3', 'chart4', 'chart5', 'chart6'));
+                if (isset($start)) {
+                    return $query->where($usersCount['filter_field'], '>=', $start);
+                }
+            }
+        })
+            ->{$usersCount['aggregate_function'] ?? 'count'}($usersCount['aggregate_field'] ?? '*');
+
+        return view('home', compact('objectsCountLineChart', 'usersCount', 'lastObjects', 'regionsPieChart', 'metroBarChart', 'floorsPieChart'));
     }
 }
