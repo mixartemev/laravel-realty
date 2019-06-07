@@ -15,20 +15,14 @@
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <li class="nav-item">
                     <a href="{{ route("admin.home") }}" class="nav-link">
-                        <p>
-                            <i class="fas fa-fw fa-tachometer-alt">
-
-                            </i>
-                            <span>{{ trans('global.dashboard') }}</span>
-                        </p>
+                        <i class="fas fa-fw fa-tachometer-alt"></i>
+                        <p>{{ trans('global.dashboard') }}</p>
                     </a>
                 </li>
                 @can('user_management_access')
                     <li class="nav-item has-treeview {{ request()->is('admin/permissions*') ? 'menu-open' : '' }} {{ request()->is('admin/roles*') ? 'menu-open' : '' }} {{ request()->is('admin/users*') ? 'menu-open' : '' }} {{ request()->is('admin/audit-logs*') ? 'menu-open' : '' }}">
                         <a class="nav-link nav-dropdown-toggle">
-                            <i class="fa-fw fas fa-users">
-
-                            </i>
+                            <i class="fa-fw fas fa-users"></i>
                             <p>
                                 <span>{{ trans('cruds.userManagement.title') }}</span>
                                 <i class="right fa fa-fw fa-angle-left"></i>
@@ -38,9 +32,7 @@
                             @can('permission_access')
                                 <li class="nav-item">
                                     <a href="{{ route("admin.permissions.index") }}" class="nav-link {{ request()->is('admin/permissions') || request()->is('admin/permissions/*') ? 'active' : '' }}">
-                                        <i class="fa-fw fas fa-unlock-alt">
-
-                                        </i>
+                                        <i class="fa-fw fas fa-unlock-alt"></i>
                                         <p>
                                             <span>{{ trans('cruds.permission.title') }}</span>
                                         </p>
@@ -50,9 +42,7 @@
                             @can('role_access')
                                 <li class="nav-item">
                                     <a href="{{ route("admin.roles.index") }}" class="nav-link {{ request()->is('admin/roles') || request()->is('admin/roles/*') ? 'active' : '' }}">
-                                        <i class="fa-fw fas fa-briefcase">
-
-                                        </i>
+                                        <i class="fa-fw fas fa-briefcase"></i>
                                         <p>
                                             <span>{{ trans('cruds.role.title') }}</span>
                                         </p>
@@ -62,9 +52,7 @@
                             @can('user_access')
                                 <li class="nav-item">
                                     <a href="{{ route("admin.users.index") }}" class="nav-link {{ request()->is('admin/users') || request()->is('admin/users/*') ? 'active' : '' }}">
-                                        <i class="fa-fw fas fa-user">
-
-                                        </i>
+                                        <i class="fa-fw fas fa-user"></i>
                                         <p>
                                             <span>{{ trans('cruds.user.title') }}</span>
                                         </p>
@@ -74,9 +62,7 @@
                             @can('audit_log_access')
                                 <li class="nav-item">
                                     <a href="{{ route("admin.audit-logs.index") }}" class="nav-link {{ request()->is('admin/audit-logs') || request()->is('admin/audit-logs/*') ? 'active' : '' }}">
-                                        <i class="fa-fw fas fa-file-alt">
-
-                                        </i>
+                                        <i class="fa-fw fas fa-file-alt"></i>
                                         <p>
                                             <span>{{ trans('cruds.auditLog.title') }}</span>
                                         </p>
@@ -89,9 +75,7 @@
                 @can('address_access')
                     <li class="nav-item has-treeview {{ request()->is('admin/regions*') ? 'menu-open' : '' }} {{ request()->is('admin/metro-stations*') ? 'menu-open' : '' }} {{ request()->is('admin/buildings*') ? 'menu-open' : '' }}">
                         <a class="nav-link nav-dropdown-toggle">
-                            <i class="fa-fw fas fa-map">
-
-                            </i>
+                            <i class="fa-fw fas fa-map"></i>
                             <p>
                                 <span>{{ trans('cruds.address.title') }}</span>
                                 <i class="right fa fa-fw fa-angle-left"></i>
@@ -101,9 +85,7 @@
                             @can('region_access')
                                 <li class="nav-item">
                                     <a href="{{ route("admin.regions.index") }}" class="nav-link {{ request()->is('admin/regions') || request()->is('admin/regions/*') ? 'active' : '' }}">
-                                        <i class="fa-fw fas fa-map-marker-alt">
-
-                                        </i>
+                                        <i class="fa-fw fas fa-map-marker-alt"></i>
                                         <p>
                                             <span>{{ trans('cruds.region.title') }}</span>
                                         </p>
@@ -113,9 +95,7 @@
                             @can('metro_station_access')
                                 <li class="nav-item">
                                     <a href="{{ route("admin.metro-stations.index") }}" class="nav-link {{ request()->is('admin/metro-stations') || request()->is('admin/metro-stations/*') ? 'active' : '' }}">
-                                        <i class="fa-fw fas fa-subway">
-
-                                        </i>
+                                        <i class="fa-fw fas fa-subway"></i>
                                         <p>
                                             <span>{{ trans('cruds.metroStation.title') }}</span>
                                         </p>
@@ -125,9 +105,7 @@
                             @can('building_access')
                                 <li class="nav-item">
                                     <a href="{{ route("admin.buildings.index") }}" class="nav-link {{ request()->is('admin/buildings') || request()->is('admin/buildings/*') ? 'active' : '' }}">
-                                        <i class="fa-fw fas fa-building">
-
-                                        </i>
+                                        <i class="fa-fw fas fa-building"></i>
                                         <p>
                                             <span>{{ trans('cruds.building.title') }}</span>
                                         </p>
@@ -140,9 +118,7 @@
                 @can('realty_object_access')
                     <li class="nav-item has-treeview {{ request()->is('admin/floors*') ? 'menu-open' : '' }} {{ request()->is('admin/realty-objects*') ? 'menu-open' : '' }}">
                         <a class="nav-link nav-dropdown-toggle">
-                            <i class="fa-fw fas fa-home">
-
-                            </i>
+                            <i class="fa-fw fas fa-home"></i>
                             <p>
                                 <span>{{ trans('cruds.realtyObject.title') }}</span>
                                 <i class="right fa fa-fw fa-angle-left"></i>
@@ -152,9 +128,7 @@
                             @can('floor_access')
                                 <li class="nav-item">
                                     <a href="{{ route("admin.floors.index") }}" class="nav-link {{ request()->is('admin/floors') || request()->is('admin/floors/*') ? 'active' : '' }}">
-                                        <i class="fa-fw fas fa-stream">
-
-                                        </i>
+                                        <i class="fa-fw fas fa-stream"></i>
                                         <p>
                                             <span>{{ trans('cruds.floor.title') }}</span>
                                         </p>
@@ -164,9 +138,7 @@
                             @can('realty_object_access')
                                 <li class="nav-item">
                                     <a href="{{ route("admin.realty-objects.index") }}" class="nav-link {{ request()->is('admin/realty-objects') || request()->is('admin/realty-objects/*') ? 'active' : '' }}">
-                                        <i class="fa-fw fab fa-buromobelexperte">
-
-                                        </i>
+                                        <i class="fa-fw fab fa-buromobelexperte"></i>
                                         <p>
                                             <span>{{ trans('cruds.realtyObject.title') }}</span>
                                         </p>
@@ -178,12 +150,8 @@
                 @endcan
                 <li class="nav-item">
                     <a href="#" class="nav-link" onclick="event.preventDefault(); document.getElementById('logoutform').submit();">
-                        <p>
-                            <i class="fas fa-fw fa-sign-out-alt">
-
-                            </i>
-                            <span>{{ trans('global.logout') }}</span>
-                        </p>
+                        <i class="fas fa-fw fa-sign-out-alt"></i>
+                        <p>{{ trans('global.logout') }}</p>
                     </a>
                 </li>
             </ul>
