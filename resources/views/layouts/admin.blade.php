@@ -81,7 +81,7 @@
             <div class="float-right d-none d-sm-block">
                 <b>V</b> 0.0.9-alpha
             </div>
-            <strong> &copy;</strong> {{-- trans('global.allRightsReserved') --}}
+            <strong> &copy;</strong> {{ config('app.name') }}{{-- trans('global.allRightsReserved') --}}
         </footer>
         <form id="logoutform" action="{{ route('logout') }}" method="POST" style="display: none;">
             {{ csrf_field() }}
