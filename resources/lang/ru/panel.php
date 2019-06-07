@@ -1,5 +1,5 @@
 <?php
 
 return [
-    'site_title' => 'INV',
+    'site_title' => 'invESTATE CRM',
 ];
