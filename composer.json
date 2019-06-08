@@ -9,14 +9,16 @@
     "license": "MIT",
     "require": {
         "php": "^7.1.3",
+        "ext-json": "*",
+        "barryvdh/laravel-ide-helper": "^2.6",
         "bugsnag/bugsnag-laravel": "^2.15",
         "doctrine/dbal": "^2.9",
         "fideloper/proxy": "^4.0",
         "laravel/framework": "5.8.*",
         "laravel/tinker": "^1.0",
-        "yajra/laravel-datatables-oracle": "~9.0",
+        "laraveldaily/laravel-charts": "^0.1.0",
         "spatie/laravel-medialibrary": "^7.0.0",
-        "laraveldaily/laravel-charts": "^0.1.0"
+        "yajra/laravel-datatables-oracle": "~9.0"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",

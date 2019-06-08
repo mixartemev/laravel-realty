@@ -9,10 +9,14 @@ class CreateRegionsTable extends Migration
     public function up()
     {
         Schema::create('regions', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('name');
-            $table->boolean('is_moscow')->default(0);
-            $table->timestamps();
+            $table->smallIncrements('id');
+            $table->string('name')->unique();
+            $table->unsignedSmallInteger('adm_area_id')->nullable();
+            $table->foreign('adm_area_id', 'regions_adm_area_id_fkey')
+                ->references('id')
+                ->on('adm_areas')
+                ->onUpdate('CASCADE')
+                ->onDelete('RESTRICT');
         });
     }
 }
