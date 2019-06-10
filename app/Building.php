@@ -2,86 +2,69 @@
 
 namespace App;
 
-use App\Traits\Auditable;
+use Carbon\Carbon;
+use Eloquent;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * App\Building
+ * Class Building
  *
- * @property int $id
- * @property string $address
- * @property string $type
- * @property string $profile
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property \Illuminate\Support\Carbon|null $deleted_at
- * @property int|null $metro_station_id
- * @property int $region_id
- * @property-read \App\MetroStation|null $metro_station
- * @property-read \App\Region $region
- * @method static bool|null forceDelete()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Building newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Building newQuery()
- * @method static \Illuminate\Database\Query\Builder|\App\Building onlyTrashed()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Building query()
- * @method static bool|null restore()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Building whereAddress($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Building whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Building whereDeletedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Building whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Building whereMetroStationId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Building whereProfile($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Building whereRegionId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Building whereType($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Building whereUpdatedAt($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Building withTrashed()
- * @method static \Illuminate\Database\Query\Builder|\App\Building withoutTrashed()
- * @mixin \Eloquent
+ * @property int $id Здания
+ * @property string $address Адрес
+ * @property int $region_id Округ / Район подмосковья
+ * @property int $metro_station_id Метро
+ * @property int $metro_distance Удаленность до метро
+ * @property int $type Тип дома
+ * @property int $profile Профиль помещения
+ * @property int $area Общая площадь
+ * @property Carbon $created_at
+ * @property Carbon $updated_at
+ * @property string $deleted_at
+ *
+ * @property MetroStation $metro_station
+ * @property Region $region
+ * @property Collection|Floor[] $floors
+ * @mixin Eloquent
+ * @package App\Models
  */
 class Building extends Model
 {
-    use SoftDeletes, Auditable;
+	use SoftDeletes;
+	protected $table = 'buildings';
 
-    public $table = 'buildings';
+	protected $casts = [
+		'region_id' => 'int',
+		'metro_station_id' => 'int',
+		'metro_distance' => 'int',
+		'type' => 'int',
+		'profile' => 'int',
+		'area' => 'int'
+	];
 
-    protected $dates = [
-        'created_at',
-        'updated_at',
-        'deleted_at',
-    ];
+	protected $fillable = [
+		'address',
+		'region_id',
+		'metro_station_id',
+		'metro_distance',
+		'type',
+		'profile',
+		'area'
+	];
 
-    protected $fillable = [
-        'type',
-        'address',
-        'profile',
-        'region_id',
-        'created_at',
-        'updated_at',
-        'deleted_at',
-        'metro_station_id',
-    ];
+	public function metro_station()
+	{
+		return $this->belongsTo(MetroStation::class);
+	}
 
-    const PROFILE_SELECT = [
-        '1' => 'Встроенное',
-        '2' => 'Встроенно-пристроенное',
-        '3' => 'ОСЗ целиком',
-    ];
+	public function region()
+	{
+		return $this->belongsTo(Region::class);
+	}
 
-    const TYPE_SELECT = [
-        '1' => 'Жилое',
-        '2' => 'Административное',
-        '3' => 'ОСЗ целиком',
-        '4' => 'Реконструкция',
-    ];
-
-    public function region()
-    {
-        return $this->belongsTo(Region::class, 'region_id');
-    }
-
-    public function metro_station()
-    {
-        return $this->belongsTo(MetroStation::class, 'metro_station_id');
-    }
+	public function floors()
+	{
+		return $this->hasMany(Floor::class);
+	}
 }

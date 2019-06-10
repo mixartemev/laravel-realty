@@ -14,11 +14,11 @@ class CreateBuildingsTable extends Migration
     {
         Schema::create('buildings', function(Blueprint $table)
         {
-            $table->integerIncrements('id', true)->comment('Здания');
+            $table->increments('id')->comment('Здания');
             $table->string('address')->nullable()->comment('Адрес');
             $table->unsignedSmallInteger('region_id')->nullable()->comment('Округ / Район подмосковья');
             $table->unsignedSmallInteger('metro_station_id')->nullable()->comment('Метро');
-            $table->tinyInteger('metro_distance')->comment('Удаленность до метро');
+            $table->tinyInteger('metro_distance')->nullable()->comment('Удаленность до метро');
             $table->unsignedTinyInteger('type')->comment('Тип дома');
             $table->unsignedTinyInteger('profile')->comment('Профиль помещения');
             $table->smallInteger('area')->nullable()->comment('Общая площадь');
