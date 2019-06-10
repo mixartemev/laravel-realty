@@ -53,6 +53,19 @@ class Building extends Model
 		'area'
 	];
 
+    const PROFILE_SELECT = [
+        '1' => 'Встроенное',
+        '2' => 'Встроенно-пристроенное',
+        '3' => 'ОСЗ целиком',
+    ];
+
+    const TYPE_SELECT = [
+        '1' => 'Жилое',
+        '2' => 'Административное',
+        '3' => 'ОСЗ целиком',
+        '4' => 'Реконструкция',
+    ];
+
 	public function metro_station()
 	{
 		return $this->belongsTo(MetroStation::class);
