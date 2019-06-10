@@ -73,9 +73,9 @@ class HomeController
         $settings4 = [
             'chart_title'        => 'Региональность',
             'chart_type'         => 'pie',
-            'report_type'        => 'group_by_string',
+            'report_type'        => 'group_by_relationship',
             'model'              => 'App\\Building',
-            'group_by_field'     => 'region_id',
+            'group_by_field'     => 'region.name',
             'aggregate_function' => 'count',
             'filter_field'       => 'created_at',
             'column_class'       => 'col-md-4',

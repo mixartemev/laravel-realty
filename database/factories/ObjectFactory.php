@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Factory;
 $factory->define(RealtyObject::class, function (Faker $faker) {
     return [
         'planned_contact' => $faker->date('d.m.Y'),
-        'created_at' => $faker->date('d.m.Y'),
+        'created_at' => $faker->date(),
         'cadastral_numb' => $faker->shuffleString(),
         'ceiling' => $faker->randomFloat(1,2,6),
         'contract_status' => $faker->randomElement([1,2]),

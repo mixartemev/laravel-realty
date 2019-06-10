@@ -1,5 +1,6 @@
 <?php
 
+use App\Building;
 use App\Floor;
 use App\RealtyObject;
 use Illuminate\Database\Seeder;
@@ -13,13 +14,15 @@ class BuildingsTableSeeder extends Seeder
      */
     public function run()
     {
-        $buildings = factory(App\Building::class, 50)->create();
+        $buildings = factory(Building::class, 10)->create();
 
         $buildings->each(function($u) {
-            /** @var \App\Building $u */
-            $u->floors()->save(factory(App\Floor::class)->create())->each(function($f) {
-                /** @var \App\Floor $f */
-                $f->realty_objects()->save(factory(App\RealtyObject::class)->create());
+            $floors = factory(Floor::class, 3)->create();
+            /** @var Building $u */
+            $floors->each(function($f) use ($u){
+                $u->floors()->save($f);
+                /** @var Floor $f */
+                $f->realty_objects()->save(factory(RealtyObject::class)->create());
             });
         });
     }
