@@ -1,6 +1,7 @@
 <?php
 
 use App\Building;
+use App\Console\Commands\subway;
 use App\Floor;
 use App\RealtyObject;
 use Illuminate\Database\Seeder;
@@ -14,6 +15,8 @@ class BuildingsTableSeeder extends Seeder
      */
     public function run()
     {
+        subway::handle();
+
         $buildings = factory(Building::class, 10)->create();
 
         $buildings->each(function($u) {
