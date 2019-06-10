@@ -30,7 +30,7 @@ class CreateMetroStationsTable extends Migration
                 'Бутовская линия Лёгкого метро',
                 'Московская монорельсовая транспортная система',
             ]);
-            $table->unique('name', 'line');
+            $table->unique(['name', 'line']);
             $table->unsignedSmallInteger('region_id');
             $table->foreign('region_id', 'metro_stations_region_id_fkey')
                 ->references('id')
