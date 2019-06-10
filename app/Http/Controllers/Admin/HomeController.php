@@ -69,18 +69,18 @@ class HomeController
 //            ->take($lastObjects['entries_number'])
 //            ->get();
 
-
         $settings4 = [
             'chart_title'        => 'Региональность',
             'chart_type'         => 'pie',
+            'model'              => 'App\Building',
             'report_type'        => 'group_by_relationship',
-            'model'              => 'App\\Building',
             'relationship_name'  => 'region',
             'group_by_field'     => 'name',
             'aggregate_function' => 'count',
-            'filter_field'       => 'created_at',
+            //'aggregate_field'    => 'id',
+            //'filter_field'       => 'created_at',
             'column_class'       => 'col-md-4',
-            'entries_number'     => '5',
+            //'entries_number'     => '5',
         ];
         $regionsPieChart = new LaravelChart($settings4);
 
@@ -88,7 +88,7 @@ class HomeController
             'chart_title'        => 'Метрошность',
             'chart_type'         => 'bar',
             'report_type'        => 'group_by_string',
-            'model'              => 'App\\Building',
+            'model'              => 'App\Building',
             'group_by_field'     => 'metro_station_id',
             'aggregate_function' => 'count',
             'filter_field'       => 'created_at',
@@ -101,7 +101,7 @@ class HomeController
             'chart_title'           => 'Количество сотрудников',
             'chart_type'            => 'number_block',
             'report_type'           => 'group_by_date',
-            'model'                 => 'App\\User',
+            'model'                 => 'App\User',
             'group_by_field'        => 'email_verified_at',
             'group_by_period'       => 'day',
             'aggregate_function'    => 'count',
