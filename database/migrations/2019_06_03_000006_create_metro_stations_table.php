@@ -10,7 +10,7 @@ class CreateMetroStationsTable extends Migration
     {
         Schema::create('metro_stations', function (Blueprint $table) {
             $table->smallIncrements('id');
-            $table->string('name');
+            $table->string('name', 255);
             $table->enum('line', [
                 'Сокольническая линия',
                 'Арбатско-Покровская линия',
@@ -30,6 +30,7 @@ class CreateMetroStationsTable extends Migration
                 'Бутовская линия Лёгкого метро',
                 'Московская монорельсовая транспортная система',
             ]);
+            $table->unique('name', 'line');
             $table->unsignedSmallInteger('region_id');
             $table->foreign('region_id', 'metro_stations_region_id_fkey')
                 ->references('id')

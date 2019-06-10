@@ -10,9 +10,11 @@ class CreateFloorsTable extends Migration
     {
         Schema::create('floors', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('number');
-            $table->integer('area')->nullable();
-            $table->float('ceiling', 4, 2)->nullable();
+            $table->unsignedTinyInteger('number');
+            $table->unsignedSmallInteger('area')->nullable();
+            $table->decimal('ceiling', 4, 2)->nullable();
+            $table->unsignedInteger('building_id');
+            $table->foreign('building_id', 'building_fk_89463')->references('id')->on('buildings');
             $table->timestamps();
             $table->softDeletes();
         });
