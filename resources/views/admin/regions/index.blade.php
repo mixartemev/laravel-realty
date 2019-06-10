@@ -27,6 +27,9 @@
                         </th>
                         <th>
                             {{ trans('cruds.region.fields.is_moscow') }}
+                        </th></th>
+                        <th>
+                            {{ trans('cruds.region.fields.adm_area') }}
                         </th>
                         <th>
                             &nbsp;
@@ -40,10 +43,13 @@
 
                             </td>
                             <td>
-                                {{ $region->name ?? '' }}
+                                {{ $region->name }}
                             </td>
                             <td>
-                                {{ $region->is_moscow ? trans('global.yes') : trans('global.no') }}
+                                {{ $region->admArea->is_moscow ? trans('global.yes') : trans('global.no') }}
+                            </td>
+                            <td>
+                                {{ $region->admArea->name ?? '' }}
                             </td>
                             <td>
                                 @can('region_show')
@@ -102,10 +108,10 @@
           .done(function () { location.reload() })
       }
     }
-  }
-  let dtButtons = $.extend(true, [], $.fn.dataTable.defaults.buttons)
+  };
+  let dtButtons = $.extend(true, [], $.fn.dataTable.defaults.buttons);
 @can('region_delete')
-  dtButtons.push(deleteButton)
+  dtButtons.push(deleteButton);
 @endcan
 
   $('.datatable:not(.ajaxTable)').DataTable({ buttons: dtButtons })

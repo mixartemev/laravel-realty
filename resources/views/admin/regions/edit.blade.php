@@ -10,7 +10,7 @@
         <form action="{{ route("admin.regions.update", [$region->id]) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
-            @include ('admin.regions.form', ['region' => null])
+            @include ('admin.regions.form', ['region' => $region])
         </form>
     </div>
 </div>

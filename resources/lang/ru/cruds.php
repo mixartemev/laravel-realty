@@ -76,6 +76,8 @@ return [
             'name_helper'       => '',
             'is_moscow'         => 'в Москве',
             'is_moscow_helper'  => '',
+            'adm_area'         => 'Округ',
+            'adm_area_helper'  => '',
             'created_at'        => 'Created At',
             'created_at_helper' => '',
             'updated_at'        => 'Updated at',
