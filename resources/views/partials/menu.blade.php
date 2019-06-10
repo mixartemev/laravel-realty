@@ -92,16 +92,6 @@
                                     </a>
                                 </li>
                             @endcan
-                            @can('metro_station_access')
-                                <li class="nav-item">
-                                    <a href="{{ route("admin.metro-stations.index") }}" class="nav-link {{ request()->is('admin/metro-stations') || request()->is('admin/metro-stations/*') ? 'active' : '' }}">
-                                        <i class="fa-fw fas fa-subway"></i>
-                                        <p>
-                                            <span>{{ trans('cruds.metroStation.title') }}</span>
-                                        </p>
-                                    </a>
-                                </li>
-                            @endcan
                             @can('building_access')
                                 <li class="nav-item">
                                     <a href="{{ route("admin.buildings.index") }}" class="nav-link {{ request()->is('admin/buildings') || request()->is('admin/buildings/*') ? 'active' : '' }}">

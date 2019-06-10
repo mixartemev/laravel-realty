@@ -158,30 +158,6 @@ class PermissionsTableSeeder extends Seeder
                 'updated_at' => '2019-06-05 06:57:39',
             ],
             [
-                'id'         => '26',
-                'title'      => 'metro_station_create',
-                'created_at' => '2019-06-05 06:57:39',
-                'updated_at' => '2019-06-05 06:57:39',
-            ],
-            [
-                'id'         => '27',
-                'title'      => 'metro_station_edit',
-                'created_at' => '2019-06-05 06:57:39',
-                'updated_at' => '2019-06-05 06:57:39',
-            ],
-            [
-                'id'         => '28',
-                'title'      => 'metro_station_delete',
-                'created_at' => '2019-06-05 06:57:39',
-                'updated_at' => '2019-06-05 06:57:39',
-            ],
-            [
-                'id'         => '29',
-                'title'      => 'metro_station_access',
-                'created_at' => '2019-06-05 06:57:39',
-                'updated_at' => '2019-06-05 06:57:39',
-            ],
-            [
                 'id'         => '30',
                 'title'      => 'floor_create',
                 'created_at' => '2019-06-05 06:57:39',
