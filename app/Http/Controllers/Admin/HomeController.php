@@ -40,34 +40,34 @@ class HomeController
         $floorsPieChart = new LaravelChart($settings6);
 
 
-        $lastObjects = [
-            'chart_title'           => 'Последние 10 объектов этого месяца',
-            'chart_type'            => 'latest_entries',
-            'report_type'           => 'group_by_date',
-            'model'                 => 'App\\RealtyObject',
-            'group_by_field'        => 'planned_contact',
-            'group_by_period'       => 'day',
-            'aggregate_function'    => 'count',
-            'filter_field'          => 'created_at',
-            'filter_period'         => 'month',
-            'group_by_field_format' => 'd.m.Y',
-            'column_class'          => 'col-md-12',
-            'entries_number'        => '10',
-            'fields'                => [
-                '0' => 'user',
-                '1' => 'planned_contact',
-                '2' => 'cadastral_numb',
-                '3' => 'area',
-                '4' => 'contract_status',
-                '5' => 'commission',
-                '6' => 'cost',
-                '7' => 'created_at',
-                '8' => 'floor',
-            ],
-        ];
-        $lastObjects['data'] = $lastObjects['model']::latest()
-            ->take($lastObjects['entries_number'])
-            ->get();
+//        $lastObjects = [
+//            'chart_title'           => 'Последние 10 объектов этого месяца',
+//            'chart_type'            => 'latest_entries',
+//            'report_type'           => 'group_by_date',
+//            'model'                 => 'App\\RealtyObject',
+//            'group_by_field'        => 'planned_contact',
+//            'group_by_period'       => 'day',
+//            'aggregate_function'    => 'count',
+//            'filter_field'          => 'created_at',
+//            'filter_period'         => 'month',
+//            'group_by_field_format' => 'd.m.Y',
+//            'column_class'          => 'col-md-12',
+//            'entries_number'        => '10',
+//            'fields'                => [
+//                '0' => 'user',
+//                '1' => 'planned_contact',
+//                '2' => 'cadastral_numb',
+//                '3' => 'area',
+//                '4' => 'contract_status',
+//                '5' => 'commission',
+//                '6' => 'cost',
+//                '7' => 'created_at',
+//                '8' => 'floor',
+//            ],
+//        ];
+//        $lastObjects['data'] = $lastObjects['model']::latest()
+//            ->take($lastObjects['entries_number'])
+//            ->get();
 
 
         $settings4 = [
@@ -137,6 +137,6 @@ class HomeController
         })
             ->{$usersCount['aggregate_function'] ?? 'count'}($usersCount['aggregate_field'] ?? '*');
 
-        return view('home', compact('objectsCountLineChart', 'usersCount', 'lastObjects', 'regionsPieChart', 'metroBarChart', 'floorsPieChart'));
+        return view('home', compact('objectsCountLineChart', 'usersCount', /*'lastObjects', */'regionsPieChart', 'metroBarChart', 'floorsPieChart'));
     }
 }

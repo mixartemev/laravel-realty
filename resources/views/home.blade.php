@@ -14,35 +14,35 @@
                 </div>
 
                 {{-- Widget - latest entries --}}
-                <div class="{{ $lastObjects['column_class'] }}">
-                    <h3>{{ $lastObjects['chart_title'] }}</h3>
-                    <table class="table table-bordered table-striped">
-                        <thead>
-                            <tr>
-                                @foreach($lastObjects['fields'] as $field)
-                                    <th>
-                                        {{ ucfirst($field) }}
-                                    </th>
-                                @endforeach
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @forelse($lastObjects['data'] as $row)
-                                <tr>
-                                    @foreach($lastObjects['fields'] as $field)
-                                        <td>
-                                            {{ $row->{$field} }}
-                                        </td>
-                                    @endforeach
-                                </tr>
-                                @empty
-                                <tr>
-                                    <td colspan="{{ count($lastObjects['fields']) }}">{{ __('No entries found') }}</td>
-                                </tr>
-                            @endforelse
-                        </tbody>
-                    </table>
-                </div>
+{{--                <div class="{{ $lastObjects['column_class'] }}">--}}
+{{--                    <h3>{{ $lastObjects['chart_title'] }}</h3>--}}
+{{--                    <table class="table table-bordered table-striped">--}}
+{{--                        <thead>--}}
+{{--                            <tr>--}}
+{{--                                @foreach($lastObjects['fields'] as $field)--}}
+{{--                                    <th>--}}
+{{--                                        {{ ucfirst($field) }}--}}
+{{--                                    </th>--}}
+{{--                                @endforeach--}}
+{{--                            </tr>--}}
+{{--                        </thead>--}}
+{{--                        <tbody>--}}
+{{--                            @forelse($lastObjects['data'] as $row)--}}
+{{--                                <tr>--}}
+{{--                                    @foreach($lastObjects['fields'] as $field)--}}
+{{--                                        <td>--}}
+{{--                                            {{ $row->{$field} }}--}}
+{{--                                        </td>--}}
+{{--                                    @endforeach--}}
+{{--                                </tr>--}}
+{{--                                @empty--}}
+{{--                                <tr>--}}
+{{--                                    <td colspan="{{ count($lastObjects['fields']) }}">{{ __('No entries found') }}</td>--}}
+{{--                                </tr>--}}
+{{--                            @endforelse--}}
+{{--                        </tbody>--}}
+{{--                    </table>--}}
+{{--                </div>--}}
                 {{-- !Widget - latest entries --}}
 
                 <div class="{{ $regionsPieChart->options['column_class'] }}">
