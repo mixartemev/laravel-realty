@@ -26,13 +26,13 @@ class HomeController
         $settings6 = [
             'chart_title'           => 'Этажность',
             'chart_type'            => 'pie',
-            'report_type'           => 'group_by_date',
+            'report_type'           => 'group_by_string',
             'model'                 => 'App\\Floor',
-            'group_by_field'        => 'created_at',
-            'group_by_period'       => 'day',
+            'group_by_field'        => 'number',
+//            'group_by_period'       => 'day',
             'aggregate_function'    => 'count',
-            'filter_field'          => 'created_at',
-            'group_by_field_format' => 'd.m.Y H:i:s',
+//            'filter_field'          => 'created_at',
+//            'group_by_field_format' => 'd.m.Y H:i:s',
             'column_class'          => 'col-md-4',
             'entries_number'        => '5',
         ];
