@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Models\RealtyObject;
 use App\Traits\Auditable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -61,5 +62,10 @@ class Floor extends Model
     public function building()
     {
         return $this->belongsTo(Building::class, 'building_id');
+    }
+
+    public function realty_objects()
+    {
+        return $this->hasMany(RealtyObject::class);
     }
 }
