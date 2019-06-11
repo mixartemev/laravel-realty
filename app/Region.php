@@ -35,18 +35,18 @@ class Region extends Model
 		'adm_area_id'
 	];
 
-	public function admArea()
-	{
-		return $this->belongsTo(AdmArea::class);
-	}
+    public function adm_area()
+    {
+        return $this->belongsTo(AdmArea::class);
+    }
 
-	public function buildings()
-	{
-		return $this->hasMany(Building::class);
-	}
+    public function buildings()
+    {
+        return $this->hasMany(Building::class);
+    }
 
-	public function metroStations()
-	{
-		return $this->hasMany(MetroStation::class);
-	}
+    public function metro_stations()
+    {
+        return $this->hasMany(MetroStation::class);
+    }
 }

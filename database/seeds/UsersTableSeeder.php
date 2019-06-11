@@ -19,5 +19,7 @@ class UsersTableSeeder extends Seeder
         ]];
 
         User::insert($users);
+
+        factory(User::class, 10)->create();
     }
 }

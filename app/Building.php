@@ -16,8 +16,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property int $region_id Округ / Район подмосковья
  * @property int $metro_station_id Метро
  * @property int $metro_distance Удаленность до метро
- * @property int $type Тип дома
- * @property int $profile Профиль помещения
+ * @property int $type Тип здания
  * @property int $area Общая площадь
  * @property Carbon $created_at
  * @property Carbon $updated_at
@@ -25,9 +24,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  *
  * @property MetroStation $metro_station
  * @property Region $region
- * @property Collection|Floor[] $floors
+ * @property Collection|RealtyObject[] $realty_objects
+ *
  * @mixin Eloquent
- * @package App\Models
+ * @package App
  */
 class Building extends Model
 {
@@ -39,7 +39,6 @@ class Building extends Model
 		'metro_station_id' => 'int',
 		'metro_distance' => 'int',
 		'type' => 'int',
-		'profile' => 'int',
 		'area' => 'int'
 	];
 
@@ -49,22 +48,8 @@ class Building extends Model
 		'metro_station_id',
 		'metro_distance',
 		'type',
-		'profile',
 		'area'
 	];
-
-    const PROFILE_SELECT = [
-        '1' => 'Встроенное',
-        '2' => 'Встроенно-пристроенное',
-        '3' => 'ОСЗ целиком',
-    ];
-
-    const TYPE_SELECT = [
-        '1' => 'Жилое',
-        '2' => 'Административное',
-        '3' => 'ОСЗ целиком',
-        '4' => 'Реконструкция',
-    ];
 
 	public function metro_station()
 	{
@@ -76,8 +61,8 @@ class Building extends Model
 		return $this->belongsTo(Region::class);
 	}
 
-	public function floors()
+	public function realty_objects()
 	{
-		return $this->hasMany(Floor::class);
+		return $this->hasMany(RealtyObject::class);
 	}
 }

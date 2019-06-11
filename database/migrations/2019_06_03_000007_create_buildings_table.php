@@ -19,8 +19,7 @@ class CreateBuildingsTable extends Migration
             $table->unsignedSmallInteger('region_id')->nullable()->comment('Округ / Район подмосковья');
             $table->unsignedSmallInteger('metro_station_id')->nullable()->comment('Метро');
             $table->tinyInteger('metro_distance')->nullable()->comment('Удаленность до метро');
-            $table->unsignedTinyInteger('type')->comment('Тип дома');
-            $table->unsignedTinyInteger('profile')->comment('Профиль помещения');
+            $table->unsignedTinyInteger('type')->comment('Тип здания');
             $table->smallInteger('area')->nullable()->comment('Общая площадь');
             $table->timestamps();
             $table->softDeletes();

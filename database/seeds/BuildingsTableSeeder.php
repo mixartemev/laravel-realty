@@ -19,13 +19,15 @@ class BuildingsTableSeeder extends Seeder
 
         $buildings = factory(Building::class, 10)->create();
 
-        $buildings->each(function($u) {
-            $floors = factory(Floor::class, 3)->create();
-            /** @var Building $u */
-            $floors->each(function($f) use ($u){
-                $u->floors()->save($f);
-                /** @var Floor $f */
-                $f->realty_objects()->save(factory(RealtyObject::class)->create());
+        $buildings->each(function($b) {
+
+            $objects = factory(RealtyObject::class, 5)->create();
+
+            /** @var Building $b */
+            $objects->each(function($o) use ($b){
+                $b->realty_objects()->save($o);
+                /** @var RealtyObject $o */
+                $o->floors()->save(factory(Floor::class)->create());
             });
         });
     }

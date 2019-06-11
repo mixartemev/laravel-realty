@@ -2,7 +2,6 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\Schema;
 
 class CreateMetroStationsTable extends Migration
 {
@@ -29,14 +28,28 @@ class CreateMetroStationsTable extends Migration
                 'Большая кольцевая линия',
                 'Бутовская линия Лёгкого метро',
                 'Московская монорельсовая транспортная система',
-            ]);
+            ])->comment('Ветка');;
             $table->unique(['name', 'line']);
-            $table->unsignedSmallInteger('region_id');
+            $table->unsignedSmallInteger('region_id')->comment('Регион');;
             $table->foreign('region_id', 'metro_stations_region_id_fkey')
                 ->references('id')
                 ->on('regions')
                 ->onUpdate('CASCADE')
                 ->onDelete('RESTRICT');
         });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::table('buildings', function(Blueprint $table)
+        {
+            $table->dropForeign('metro_stations_region_id_fkey');
+        });
+        Schema::dropIfExists('metro_stations');
     }
 }

@@ -2,7 +2,6 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\Schema;
 
 class CreateRegionsTable extends Migration
 {
@@ -10,13 +9,27 @@ class CreateRegionsTable extends Migration
     {
         Schema::create('regions', function (Blueprint $table) {
             $table->smallIncrements('id');
-            $table->string('name')->unique();
-            $table->unsignedSmallInteger('adm_area_id')->nullable();
+            $table->string('name')->unique()->comment('Район');;
+            $table->unsignedTinyInteger('adm_area_id')->nullable()->comment('Административный округ');;
             $table->foreign('adm_area_id', 'regions_adm_area_id_fkey')
                 ->references('id')
                 ->on('adm_areas')
                 ->onUpdate('CASCADE')
                 ->onDelete('RESTRICT');
         });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::table('buildings', function(Blueprint $table)
+        {
+            $table->dropForeign('regions_adm_area_id_fkey');
+        });
+        Schema::dropIfExists('regions');
     }
 }
