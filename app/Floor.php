@@ -26,7 +26,25 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Floor extends Model
 {
 	use SoftDeletes;
+
 	protected $table = 'floors';
+
+    const TYPE_GENERAL = 1;
+    const TYPE_MEZZANINE = 2;
+    const TYPE_ATTIC = 3;
+    const TYPE_BASEMENT = 4;
+    const TYPE_MANSARD = 5;
+    const TYPE_ROOF = 6;
+    const TYPE_GROUND_FLOOR = 7;
+    const TYPES = [
+        'этаж',
+        'антресоль',
+        'чердак',
+        'подвал',
+        'мансарда',
+        'крыша',
+        'цоколь',
+    ];
 
 	protected $casts = [
 		'number' => 'int',

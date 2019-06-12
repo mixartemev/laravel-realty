@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Factory;
 $factory->define(Floor::class, function (Faker $faker) {
     return [
         'number' => $faker->randomDigit,
-        'name' => $faker->randomElement(['этаж','подвал','мансарда','крыша', 'цоколь']),
+        'type' => $faker->randomElement([1,2,3,4,5,6,7]),
         'area' => $faker->randomFloat(1,22,6000),
         'ceiling' => $faker->randomFloat(1,2,6),
         'realty_object_id' => function(){
