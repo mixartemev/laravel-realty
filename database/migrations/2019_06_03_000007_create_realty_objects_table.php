@@ -8,17 +8,20 @@ class CreateRealtyObjectsTable extends Migration
     public function up()
     {
         Schema::create('realty_objects', function (Blueprint $table) {
+            /** Common */
             $table->increments('id');
+            // there is floors
+            $table->tinyInteger('type')->comment('Тип площади');
+            $table->tinyInteger('profile')->comment('Классификация помещения');
+
             $table->unsignedInteger('user_id')->comment('Брокер');
             $table->unsignedInteger('contact_id')->nullable()->comment('Контакт');
             $table->unsignedInteger('building_id')->comment('Здание');
+
             $table->date('planned_contact')->nullable()->comment('Запланированная дата следующего контакта');
             $table->string('cadastral_numb')->nullable()->comment('Кадастровый номер');
-            $table->decimal('area',5,2)->comment('Площадь');
-            $table->smallInteger('floor')->nullable()->comment('Этаж');
             $table->smallInteger('power')->nullable()->comment('Электро мощность');
-            $table->decimal('ceiling', 4,2)->nullable()->comment('Высота потолков');
-            $table->tinyInteger('profile')->default(1)->comment('Профиль помещения');
+
             $table->tinyInteger('contract_status')->default(1)->comment('Подписанность договора');
             $table->tinyInteger('cost')->nullable()->comment('Стоимость');
             $table->tinyInteger('commission')->nullable()->comment('Комиссия');

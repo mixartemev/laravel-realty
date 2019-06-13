@@ -41,6 +41,35 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class RealtyObject extends Model
 {
 	use SoftDeletes;
+
+	const TYPE_RETAIL = 1;
+	const TYPE_OFFICE = 2;
+	const TYPE_STOCK = 3;
+	const TYPE_PSN = 4;
+	const TYPE_FLAT = 5;
+	const TYPE_APARTMENT = 6;
+	const TYPE_VILLA = 7;
+	const TYPES = [
+	    self::TYPE_RETAIL => 'retail',
+        self::TYPE_OFFICE => 'офис',
+        self::TYPE_STOCK => 'склад',
+        self::TYPE_PSN => 'ПСН',
+        self::TYPE_FLAT => 'квартира',
+        self::TYPE_APARTMENT => 'апартаменты',
+        self::TYPE_VILLA => 'вилла',
+    ];
+
+    const PROFILE_INBUILT = 1;
+    const PROFILE_INBUILT_ATTACHED = 2;
+    const PROFILE_ATTACHED = 3;
+    const PROFILE_SEPARATE = 4;
+    const PROFILES = [
+        self::PROFILE_INBUILT => 'встроенное',
+        self::PROFILE_INBUILT_ATTACHED => 'встроенно-пристроенное',
+        self::PROFILE_ATTACHED => 'пристроенное',
+        self::PROFILE_SEPARATE => 'ОСЗ',
+    ];
+
 	protected $table = 'realty_objects';
 
 	protected $casts = [

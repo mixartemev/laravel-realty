@@ -20,9 +20,12 @@ class CreateContactsTable extends Migration {
 			$table->string('position')->default('')->comment('Должность');
 			$table->bigInteger('phone')->nullable()->comment('Телефон');
 			$table->string('email')->nullable()->comment('Email');
+            $table->string('web')->nullable()->comment('Веб сайт');
 			$table->string('additional_contact')->nullable()->comment('Доп. контакт');
-			$table->text('company_description')->nullable()->comment('Описание компании');
+			$table->string('company_description')->nullable()->comment('Описание компании');
+			$table->boolean('commission')->nullable()->comment('Платит комиссию');
 			$table->smallInteger('requisites')->nullable()->comment('Реквизиты');
+			// docs
 		});
 	}
 

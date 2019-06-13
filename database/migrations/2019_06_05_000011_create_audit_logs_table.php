@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class Custom1559717858886CreateAuditLogsTable extends Migration
+class CreateAuditLogsTable extends Migration
 {
     public function up()
     {

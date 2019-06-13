@@ -32,6 +32,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Building extends Model
 {
 	use SoftDeletes;
+
 	protected $table = 'buildings';
 
 	protected $casts = [
@@ -50,6 +51,21 @@ class Building extends Model
 		'type',
 		'area'
 	];
+
+    const TYPE_LIVING = 1;
+    const TYPE_MALL = 2;
+    const TYPE_BUSINESS = 3;
+    const TYPE_MFC = 4;
+    const TYPE_ADMIN = 5;
+    const TYPE_STOCK = 6;
+    const TYPES = [
+        self::TYPE_LIVING => 'жилое здание',
+        self::TYPE_MALL => 'ТЦ',
+        self::TYPE_BUSINESS => 'БЦ',
+        self::TYPE_MFC => 'МФЦ',
+        self::TYPE_ADMIN => 'Административное здание',
+        self::TYPE_STOCK => 'Склад',
+    ];
 
 	public function metro_station()
 	{
