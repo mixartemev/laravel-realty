@@ -104,8 +104,8 @@ return [
             'metro_station_helper' => '',
             'type'                 => 'Тип дома',
             'type_helper'          => '',
-            'profile'              => 'Профиль помещения',
-            'profile_helper'       => '',
+            'class'                => 'Класс',
+            'class_helper'         => '',
         ],
     ],
     'metroStation'   => [

@@ -28,18 +28,18 @@
                         {{ trans('cruds.building.fields.region') }}
                     </th>
                     <th>
-                        {{ trans('cruds.region.fields.is_moscow') }}
+                        {{ trans('cruds.building.fields.metro_station') }}
                     </th>
                     <th>
-                        {{ trans('cruds.building.fields.metro_station') }}
+                        {{ trans('cruds.building.fields.floors') }}
                     </th>
                     <th>
                         {{ trans('cruds.building.fields.type') }}
                     </th>
                     <th>
-                        {{ trans('cruds.building.fields.profile') }}
+                        {{ trans('cruds.building.fields.class') }}
                     </th>
-                    <th>
+                    <th width="36">
                         &nbsp;
                     </th>
                 </tr>
@@ -63,7 +63,7 @@
       });
 
       if (ids.length === 0) {
-        alert('{{ trans('global.datatables.zero_selected') }}')
+        alert('{{ trans('global.datatables.zero_selected') }}');
 
         return
       }
@@ -79,9 +79,9 @@
     }
   }
 
-  let dtButtons = $.extend(true, [], $.fn.dataTable.defaults.buttons)
+  let dtButtons = $.extend(true, [], $.fn.dataTable.defaults.buttons);
 @can('building_delete')
-  dtButtons.push(deleteButton)
+  dtButtons.push(deleteButton);
 @endcan
 
   let dtOverrideGlobals = {
@@ -92,14 +92,14 @@
     aaSorting: [],
     ajax: "{{ route('admin.buildings.index') }}",
     columns: [
-      { data: 'placeholder', name: 'placeholder' },
-      { data: 'address', name: 'address' },
-{ data: 'region.region', name: 'region.name' },
-{ data: 'region.is_moscow', name: 'region.is_moscow' },
-{ data: 'metroStation.metro_station', name: 'metro_station.name' },
-{ data: 'type', name: 'type' },
-{ data: 'profile', name: 'profile' },
-{ data: 'actions', name: '{{ trans('global.actions') }}' }
+        { data: 'placeholder', name: 'placeholder' },
+        { data: 'address', name: 'address' },
+        { data: 'region.region', name: 'region.name' },
+        { data: 'metroStation.metro_station', name: 'metro_station.name' },
+        { data: 'floors', name: 'floors' },
+        { data: 'type', name: 'type' },
+        { data: 'class', name: 'class' },
+        { data: 'actions', name: '{{ trans('global.actions') }}' }
     ],
   };
 
