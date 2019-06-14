@@ -11,8 +11,11 @@ class CreateRealtyObjectsTable extends Migration
             /** Common */
             $table->increments('id');
             // there is floors
-            $table->tinyInteger('type')->comment('Тип площади');
-            $table->tinyInteger('profile')->comment('Классификация помещения');
+            $table->unsignedTinyInteger('type')->comment('Тип площади');
+            $table->unsignedTinyInteger('profile')->comment('Классификация помещения');
+
+            $table->unsignedInteger('cost')->comment('Стоимость');
+            $table->unsignedTinyInteger('currency')->default(1)->comment('Валюта');
 
             $table->unsignedInteger('user_id')->comment('Брокер');
             $table->unsignedInteger('contact_id')->nullable()->comment('Контакт');
@@ -21,11 +24,12 @@ class CreateRealtyObjectsTable extends Migration
             $table->date('planned_contact')->nullable()->comment('Запланированная дата следующего контакта');
             $table->string('cadastral_numb')->nullable()->comment('Кадастровый номер');
             $table->smallInteger('power')->nullable()->comment('Электро мощность');
-
             $table->tinyInteger('contract_status')->default(1)->comment('Подписанность договора');
-            $table->tinyInteger('cost')->nullable()->comment('Стоимость');
             $table->tinyInteger('commission')->nullable()->comment('Комиссия');
-            $table->string('description')->nullable()->comment('Описание');
+            $table->text('description')->nullable()->comment('Описание');
+
+            $table->integer('payback')->nullable()->comment('Окупаемость');
+            $table->integer('bargain_limit')->nullable()->comment('Торг до');
 
             $table->timestamps();
             $table->softDeletes();

@@ -11,6 +11,7 @@ $factory->define(RealtyObject::class, function (Faker $faker) {
     return [
         'planned_contact' => $faker->date(),
         'created_at' => $faker->dateTimeThisMonth,
+        'cost' => $faker->randomNumber(),
         'type' => $faker->randomElement([1,2,3,4,5,6,7]),
         'profile' => $faker->randomElement([1,2,3,4]),
         'cadastral_numb' => $faker->shuffleString(),
