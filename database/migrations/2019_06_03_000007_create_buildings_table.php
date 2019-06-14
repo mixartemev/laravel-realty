@@ -15,12 +15,18 @@ class CreateBuildingsTable extends Migration
         Schema::create('buildings', function(Blueprint $table)
         {
             $table->increments('id')->comment('Здания');
-            $table->string('address')->nullable()->comment('Адрес');
-            $table->unsignedSmallInteger('region_id')->nullable()->comment('Округ / Район подмосковья');
+            $table->string('address')->comment('Адрес');
+            $table->unsignedSmallInteger('region_id')->comment('Округ / Район подмосковья');
             $table->unsignedSmallInteger('metro_station_id')->nullable()->comment('Метро');
-            $table->tinyInteger('metro_distance')->nullable()->comment('Удаленность до метро');
-            $table->unsignedTinyInteger('type')->comment('Тип здания');
-            $table->smallInteger('area')->nullable()->comment('Общая площадь');
+            $table->unsignedTinyInteger('metro_distance')->nullable()->comment('Удаленность до метро');
+            $table->unsignedTinyInteger('metro_distance_type')->nullable()->comment('Пешком/транспортом');
+            $table->unsignedTinyInteger('type')->comment('Тип');
+            $table->enum('class', ['A','B','C','D'])->nullable()->comment('Класс');
+            $table->date('realise_date')->nullable()->comment('Ввод в эксплуатацию');
+            $table->unsignedSmallInteger('area')->nullable()->comment('Общая площадь');
+            $table->unsignedTinyInteger('floors')->nullable()->comment('Этажность');
+            $table->text('description')->nullable()->comment('Описание');
+
             $table->timestamps();
             $table->softDeletes();
 

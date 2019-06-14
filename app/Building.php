@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Http\Traits\ModelExtension;
 use Carbon\Carbon;
 use Eloquent;
 use Illuminate\Database\Eloquent\Collection;
@@ -32,6 +33,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Building extends Model
 {
 	use SoftDeletes;
+	use ModelExtension;
 
 	protected $table = 'buildings';
 

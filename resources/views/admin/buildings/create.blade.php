@@ -51,7 +51,7 @@
                 <label for="type">{{ trans('cruds.building.fields.type') }}*</label>
                 <select id="type" name="type" class="form-control" required>
                     <option value="" disabled {{ old('type', null) === null ? 'selected' : '' }}>{{ trans('global.pleaseSelect') }}</option>
-                    @foreach(App\Building::TYPE_SELECT as $key => $label)
+                    @foreach(App\Building::TYPES as $key => $label)
                         <option value="{{ $key }}" {{ old('type', null) === (string)$key ? 'selected' : '' }}>{{ $label }}</option>
                     @endforeach
                 </select>
@@ -65,7 +65,7 @@
                 <label for="profile">{{ trans('cruds.building.fields.profile') }}*</label>
                 <select id="profile" name="profile" class="form-control" required>
                     <option value="" disabled {{ old('profile', null) === null ? 'selected' : '' }}>{{ trans('global.pleaseSelect') }}</option>
-                    @foreach(App\Building::PROFILE_SELECT as $key => $label)
+                    @foreach(($building ?? (new \App\Building()))->getEnumValues('class') as $key => $label)
                         <option value="{{ $key }}" {{ old('profile', null) === (string)$key ? 'selected' : '' }}>{{ $label }}</option>
                     @endforeach
                 </select>

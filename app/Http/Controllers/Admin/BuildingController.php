@@ -9,11 +9,21 @@ use App\Http\Requests\StoreBuildingRequest;
 use App\Http\Requests\UpdateBuildingRequest;
 use App\MetroStation;
 use App\Region;
+use DataTables;
+use Exception;
+use Gate;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Yajra\DataTables\Facades\DataTables;
+use Illuminate\View\View;
 
 class BuildingController extends Controller
 {
+    /**
+     * @param Request $request
+     * @return Factory|View
+     * @throws Exception
+     */
     public function index(Request $request)
     {
         if ($request->ajax()) {
@@ -51,11 +61,9 @@ class BuildingController extends Controller
                 return $row->metro_station_id ? $row->metro_station->name : '';
             });
             $table->editColumn('type', function ($row) {
-                return $row->type ? Building::TYPE_SELECT[$row->type] : '';
+                return $row->type ? Building::TYPES[$row->type] : '';
             });
-            $table->editColumn('profile', function ($row) {
-                return $row->profile ? Building::PROFILE_SELECT[$row->profile] : '';
-            });
+
             $table->rawColumns(['actions', 'placeholder', 'region', 'metro_station']);
 
             return $table->make(true);
@@ -66,7 +74,7 @@ class BuildingController extends Controller
 
     public function create()
     {
-        abort_unless(\Gate::allows('building_create'), 403);
+        abort_unless(Gate::allows('building_create'), 403);
 
         $regions = Region::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
@@ -77,16 +85,16 @@ class BuildingController extends Controller
 
     public function store(StoreBuildingRequest $request)
     {
-        abort_unless(\Gate::allows('building_create'), 403);
+        abort_unless(Gate::allows('building_create'), 403);
 
-        $building = Building::create($request->all());
+        Building::create($request->all());
 
         return redirect()->route('admin.buildings.index');
     }
 
     public function edit(Building $building)
     {
-        abort_unless(\Gate::allows('building_edit'), 403);
+        abort_unless(Gate::allows('building_edit'), 403);
 
         $regions = Region::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
@@ -99,7 +107,7 @@ class BuildingController extends Controller
 
     public function update(UpdateBuildingRequest $request, Building $building)
     {
-        abort_unless(\Gate::allows('building_edit'), 403);
+        abort_unless(Gate::allows('building_edit'), 403);
 
         $building->update($request->all());
 
@@ -108,16 +116,21 @@ class BuildingController extends Controller
 
     public function show(Building $building)
     {
-        abort_unless(\Gate::allows('building_show'), 403);
+        abort_unless(Gate::allows('building_show'), 403);
 
         $building->load('region', 'metro_station');
 
         return view('admin.buildings.show', compact('building'));
     }
 
+    /**
+     * @param Building $building
+     * @return RedirectResponse
+     * @throws Exception
+     */
     public function destroy(Building $building)
     {
-        abort_unless(\Gate::allows('building_delete'), 403);
+        abort_unless(Gate::allows('building_delete'), 403);
 
         $building->delete();
 
