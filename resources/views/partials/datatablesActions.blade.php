@@ -1,8 +1,8 @@
-{{--@can($viewGate)
+@can($viewGate)
     <a class="btn btn-xs btn-primary" href="{{ route('admin.' . $crudRoutePart . '.show', $row->id) }}">
         <i class="fas fa-eye"></i>
     </a>
-@endcan--}}
+@endcan
 @can($editGate)
     <a class="btn btn-xs btn-info" href="{{ route('admin.' . $crudRoutePart . '.edit', $row->id) }}">
         <i class="fas fa-edit"></i>
