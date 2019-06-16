@@ -2,11 +2,16 @@
 
 namespace App;
 
-use Carbon\Carbon;
+use App\Traits\Auditable;
 use Eloquent;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Carbon;
+use Spatie\MediaLibrary\HasMedia\HasMedia;
+use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
+use Spatie\MediaLibrary\Models\Media;
 
 /**
  * Class RealtyObject
@@ -26,21 +31,51 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property int $cost Стоимость
  * @property int $commission Комиссия
  * @property string $description Описание
- * @property Carbon $created_at
- * @property Carbon $updated_at
- * @property string $deleted_at
+ *
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property Carbon|null $deleted_at
+ *
+ * @property-read mixed $docs
+ * @property-read mixed $photos
+ * @property-read Collection|Media[] $media
+ * @property-read User $user
+ *
+ * @method static bool|null forceDelete()
+ * @method static Builder|RealtyObject newModelQuery()
+ * @method static Builder|RealtyObject newQuery()
+ * @method static Builder|RealtyObject onlyTrashed()
+ * @method static Builder|RealtyObject query()
+ * @method static bool|null restore()
+ * @method static Builder|RealtyObject whereArea($value)
+ * @method static Builder|RealtyObject whereCadastralNumb($value)
+ * @method static Builder|RealtyObject whereCeiling($value)
+ * @method static Builder|RealtyObject whereCommission($value)
+ * @method static Builder|RealtyObject whereContractStatus($value)
+ * @method static Builder|RealtyObject whereCost($value)
+ * @method static Builder|RealtyObject whereCostM($value)
+ * @method static Builder|RealtyObject whereCreatedAt($value)
+ * @method static Builder|RealtyObject whereDeletedAt($value)
+ * @method static Builder|RealtyObject whereDescription($value)
+ * @method static Builder|RealtyObject whereFloorId($value)
+ * @method static Builder|RealtyObject whereId($value)
+ * @method static Builder|RealtyObject wherePlannedContact($value)
+ * @method static Builder|RealtyObject wherePower($value)
+ * @method static Builder|RealtyObject whereUpdatedAt($value)
+ * @method static Builder|RealtyObject whereUserId($value)
+ * @method static Builder|RealtyObject withTrashed()
+ * @method static Builder|RealtyObject withoutTrashed()
  *
  * @property Building $building
  * @property Contact $contact
- * @property User $user
  * @property Collection|Floor[] $floors
  *
  * @mixin Eloquent
  * @package App
  */
-class RealtyObject extends Model
+class RealtyObject extends Model implements HasMedia
 {
-	use SoftDeletes;
+	use SoftDeletes, HasMediaTrait, Auditable;
 
 	const TYPE_RETAIL = 1;
 	const TYPE_OFFICE = 2;
@@ -91,9 +126,12 @@ class RealtyObject extends Model
 		'commission' => 'int'
 	];
 
-	protected $dates = [
-		'planned_contact'
-	];
+    protected $dates = [
+        'updated_at',
+        'created_at',
+        'deleted_at',
+        'planned_contact',
+    ];
 
 	protected $fillable = [
 		'user_id',
@@ -106,11 +144,38 @@ class RealtyObject extends Model
 		'power',
 		'ceiling',
 		'profile',
+        'planned_contact',
 		'contract_status',
 		'cost',
 		'commission',
 		'description'
 	];
+
+    public function getPlannedContactAttribute($value)
+    {
+        return $value ? Carbon::parse($value)->format(config('panel.date_format')) : null;
+    }
+
+    public function setPlannedContactAttribute($value)
+    {
+        $this->attributes['planned_contact'] = $value ? Carbon::createFromFormat(config('panel.date_format'), $value)->format('Y-m-d') : null;
+    }
+
+    public function getphotosAttribute()
+    {
+        $files = $this->getMedia('photos');
+
+        $files->each(function ($item) {
+            $item->url = $item->getUrl();
+        });
+
+        return $files;
+    }
+
+    public function getdocsAttribute()
+    {
+        return $this->getMedia('docs');
+    }
 
 	public function building()
 	{

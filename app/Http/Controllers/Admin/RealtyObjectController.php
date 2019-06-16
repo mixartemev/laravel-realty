@@ -10,7 +10,11 @@ use App\Http\Requests\StoreRealtyObjectRequest;
 use App\Http\Requests\UpdateRealtyObjectRequest;
 use App\RealtyObject;
 use App\User;
+use Exception;
+use Gate;
+use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 use Yajra\DataTables\DataTables;
 
 class RealtyObjectController extends Controller
@@ -19,14 +23,14 @@ class RealtyObjectController extends Controller
 
     /**
      * @param Request $request
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     * @throws \Exception
+     * @return Factory|View
+     * @throws Exception
      */
     public function index(Request $request)
     {
         if ($request->ajax()) {
             $query = RealtyObject::query();
-            $query->with(['user', 'floor']);
+            $query->with(['user']);
             $table = Datatables::of($query);
 
             $table->addColumn('placeholder', '&nbsp;');
@@ -61,13 +65,11 @@ class RealtyObjectController extends Controller
             $table->editColumn('cost', function ($row) {
                 return $row->cost ? $row->cost : "";
             });
-            $table->editColumn('cost_m', function ($row) {
-                return $row->cost_m ? $row->cost_m : "";
-            });
-            $table->editColumn('floor.floor', function ($row) {
-                return $row->floor_id ? $row->floor->number : '';
-            });
-            $table->rawColumns(['actions', 'placeholder', 'user', 'floor']);
+//            $table->editColumn('cost_m', function ($row) {
+//                return $row->cost_m ? $row->cost_m : "";
+//            });
+
+            $table->rawColumns(['actions', 'placeholder', 'user']);
 
             return $table->make(true);
         }
@@ -77,7 +79,7 @@ class RealtyObjectController extends Controller
 
     public function create()
     {
-        abort_unless(\Gate::allows('realty_object_create'), 403);
+        abort_unless(Gate::allows('realty_object_create'), 403);
 
         $users = User::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
@@ -88,7 +90,7 @@ class RealtyObjectController extends Controller
 
     public function store(StoreRealtyObjectRequest $request)
     {
-        abort_unless(\Gate::allows('realty_object_create'), 403);
+        abort_unless(Gate::allows('realty_object_create'), 403);
 
         $realtyObject = RealtyObject::create($request->all());
 
@@ -105,7 +107,7 @@ class RealtyObjectController extends Controller
 
     public function edit(RealtyObject $realtyObject)
     {
-        abort_unless(\Gate::allows('realty_object_edit'), 403);
+        abort_unless(Gate::allows('realty_object_edit'), 403);
 
         $users = User::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
@@ -118,7 +120,7 @@ class RealtyObjectController extends Controller
 
     public function update(UpdateRealtyObjectRequest $request, RealtyObject $realtyObject)
     {
-        abort_unless(\Gate::allows('realty_object_edit'), 403);
+        abort_unless(Gate::allows('realty_object_edit'), 403);
 
         $realtyObject->update($request->all());
 
@@ -159,16 +161,16 @@ class RealtyObjectController extends Controller
 
     public function show(RealtyObject $realtyObject)
     {
-        abort_unless(\Gate::allows('realty_object_show'), 403);
+        abort_unless(Gate::allows('realty_object_show'), 403);
 
-        $realtyObject->load('user', 'floor');
+        $realtyObject->load('user');
 
         return view('admin.realtyObjects.show', compact('realtyObject'));
     }
 
     public function destroy(RealtyObject $realtyObject)
     {
-        abort_unless(\Gate::allows('realty_object_delete'), 403);
+        abort_unless(Gate::allows('realty_object_delete'), 403);
 
         $realtyObject->delete();
 

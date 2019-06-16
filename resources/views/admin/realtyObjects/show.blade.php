@@ -90,14 +90,14 @@
                             ${{ $realtyObject->cost }}
                         </td>
                     </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.realtyObject.fields.cost_m') }}
-                        </th>
-                        <td>
-                            ${{ $realtyObject->cost_m }}
-                        </td>
-                    </tr>
+{{--                    <tr>--}}
+{{--                        <th>--}}
+{{--                            {{ trans('cruds.realtyObject.fields.cost_m') }}--}}
+{{--                        </th>--}}
+{{--                        <td>--}}
+{{--                            ${{ $realtyObject->cost_m }}--}}
+{{--                        </td>--}}
+{{--                    </tr>--}}
                     <tr>
                         <th>
                             {{ trans('cruds.realtyObject.fields.photos') }}
@@ -111,14 +111,14 @@
                             {{ $realtyObject->docs }}
                         </td>
                     </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.realtyObject.fields.floor') }}
-                        </th>
-                        <td>
-                            {{ $realtyObject->floor->number ?? '' }}
-                        </td>
-                    </tr>
+{{--                    <tr>--}}
+{{--                        <th>--}}
+{{--                            {{ trans('cruds.realtyObject.fields.floor') }}--}}
+{{--                        </th>--}}
+{{--                        <td>--}}
+{{--                            {{ $realtyObject->floor->number ?? '' }}--}}
+{{--                        </td>--}}
+{{--                    </tr>--}}
                 </tbody>
             </table>
             <a style="margin-top:20px;" class="btn btn-default" href="{{ url()->previous() }}">

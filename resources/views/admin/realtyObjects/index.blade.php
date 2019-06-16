@@ -36,13 +36,10 @@
                     <th>
                         {{ trans('cruds.realtyObject.fields.cost') }}
                     </th>
-                    <th>
-                        {{ trans('cruds.realtyObject.fields.cost_m') }}
-                    </th>
-                    <th>
-                        {{ trans('cruds.realtyObject.fields.floor') }}
-                    </th>
-                    <th>
+{{--                    <th>--}}
+{{--                        {{ trans('cruds.realtyObject.fields.cost_m') }}--}}
+{{--                    </th>--}}
+                    <th width="64">
                         &nbsp;
                     </th>
                 </tr>
@@ -95,15 +92,15 @@
     aaSorting: [],
     ajax: "{{ route('admin.realty-objects.index') }}",
     columns: [
-      { data: 'placeholder', name: 'placeholder' },
-      { data: 'user.user', name: 'user.name' },
-{ data: 'cadastral_numb', name: 'cadastral_numb' },
-{ data: 'area', name: 'area' },
-{ data: 'commission', name: 'commission' },
-{ data: 'cost', name: 'cost' },
-{ data: 'cost_m', name: 'cost_m' },
-{ data: 'floor.floor', name: 'floor.number' },
-{ data: 'actions', name: '{{ trans('global.actions') }}' }
+        { data: 'placeholder', name: 'placeholder' },
+        { data: 'user.user', name: 'user.name' },
+        { data: 'cadastral_numb', name: 'cadastral_numb' },
+        { data: 'area', name: 'area' },
+        { data: 'commission', name: 'commission' },
+        { data: 'cost', name: 'cost' },
+        // { data: 'cost_m', name: 'cost_m' },
+        // { data: 'floor.floor', name: 'floor.number' },
+        { data: 'actions', name: '{{ trans('global.actions') }}' }
     ],
   };
 

@@ -15,9 +15,6 @@ class CreateFloorsTable extends Migration
             $table->decimal('ceiling', 4, 2)->nullable()->comment('Высота потолков');
             $table->unsignedInteger('realty_object_id')->comment('Блок');
 
-            $table->timestamps();
-            $table->softDeletes();
-
             $table->foreign('realty_object_id', 'floors_realty_object_id_fkey')
                 ->references('id')
                 ->on('realty_objects')

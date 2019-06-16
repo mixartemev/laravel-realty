@@ -5,7 +5,6 @@ namespace App;
 use Carbon\Carbon;
 use Eloquent;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * Class Floor
@@ -25,9 +24,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class Floor extends Model
 {
-	use SoftDeletes;
-
 	protected $table = 'floors';
+
+	public $timestamps = false;
 
     const TYPE_GENERAL = 1;
     const TYPE_MEZZANINE = 2;
