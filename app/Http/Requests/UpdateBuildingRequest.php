@@ -28,6 +28,9 @@ class UpdateBuildingRequest extends FormRequest
             'type'      => [
                 'integer',
             ],
+            'floors' => [
+                'integer',
+            ],
             'class'   => [
                 'string',
                 'max:1',

@@ -99,6 +99,16 @@ class Building extends Model
         4 => 'IV',
     ];
 
+    public function rusReleaseDate()
+    {
+        return $this->release_date ? \Illuminate\Support\Carbon::parse($this->release_date)->format(config('panel.date_format')) : null;
+    }
+
+    public function setReleaseDateAttribute($value)
+    {
+        $this->attributes['release_date'] = $value ? Carbon::createFromFormat(config('panel.date_format'), $value)->format('Y-m-d') : null;
+    }
+
     public function getFormattedReleaseDate()
     {
         return $this->release_date->year.' '.self::ROMAN_QUARTER[$this->release_date->quarter];

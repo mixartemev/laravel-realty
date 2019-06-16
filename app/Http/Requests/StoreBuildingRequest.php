@@ -12,10 +12,10 @@ class StoreBuildingRequest extends FormRequest
         return \Gate::allows('building_create');
     }
 
-    public function rules()
+    public function rules() //todo move rules out to common
     {
         return [
-            'address'   => [
+            'address' => [
                 'required',
                 'min:3',
                 'max:255',
@@ -24,11 +24,19 @@ class StoreBuildingRequest extends FormRequest
                 'required',
                 'integer',
             ],
-            'type'      => [
+            'type' => [
                 'required',
             ],
-            'profile'   => [
-                'required',
+            'floors' => [
+                'integer',
+            ],
+            'class'   => [
+                'string',
+                'max:1',
+            ],
+            'release_date' => [
+                'date_format:' . config('panel.date_format'),
+                'nullable',
             ],
         ];
     }
