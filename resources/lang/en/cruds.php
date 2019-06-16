@@ -149,8 +149,8 @@ return [
         ],
     ],
     'address'        => [
-        'title'          => 'Адреса',
-        'title_singular' => 'Адреса',
+        'title'          => 'Locations',
+        'title_singular' => 'Location',
         'fields'         => [],
     ],
     'realtyObject'   => [

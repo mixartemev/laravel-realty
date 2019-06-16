@@ -115,22 +115,22 @@
                             </p>
                         </a>
                         <ul class="nav nav-treeview">
-                            @can('floor_access')
-                                <li class="nav-item">
-                                    <a href="{{ route("admin.floors.index") }}" class="nav-link {{ request()->is('admin/floors') || request()->is('admin/floors/*') ? 'active' : '' }}">
-                                        <i class="fa-fw fas fa-stream"></i>
-                                        <p>
-                                            <span>{{ trans('cruds.floor.title') }}</span>
-                                        </p>
-                                    </a>
-                                </li>
-                            @endcan
                             @can('realty_object_access')
                                 <li class="nav-item">
                                     <a href="{{ route("admin.realty-objects.index") }}" class="nav-link {{ request()->is('admin/realty-objects') || request()->is('admin/realty-objects/*') ? 'active' : '' }}">
                                         <i class="fa-fw fab fa-buromobelexperte"></i>
                                         <p>
                                             <span>{{ trans('cruds.realtyObject.title') }}</span>
+                                        </p>
+                                    </a>
+                                </li>
+                            @endcan
+                            @can('floor_access')
+                                <li class="nav-item">
+                                    <a href="{{ route("admin.floors.index") }}" class="nav-link {{ request()->is('admin/floors') || request()->is('admin/floors/*') ? 'active' : '' }}">
+                                        <i class="fa-fw fas fa-stream"></i>
+                                        <p>
+                                            <span>{{ trans('cruds.floor.title') }}</span>
                                         </p>
                                     </a>
                                 </li>
