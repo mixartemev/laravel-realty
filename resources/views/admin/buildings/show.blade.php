@@ -57,6 +57,14 @@ use App\Building;
                     </tr>
                     <tr>
                         <th>
+                            {{ trans('cruds.building.fields.floors') }}
+                        </th>
+                        <td>
+                            {{ $building->floors }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
                             {{ trans('cruds.building.fields.release_date') }}
                         </th>
                         <td>
