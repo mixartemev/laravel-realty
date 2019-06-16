@@ -47,7 +47,7 @@ class subway extends Command
             // adm areas
             AdmArea::firstOrCreate([
                 'name' => $sw['AdmArea'],
-                'is_moscow' => 1
+                'is_moscow' => $sw['AdmArea'] != 'Новомосковский административный округ' ? 1 : 0,
             ]);
         }
         foreach ($json as $sw) {

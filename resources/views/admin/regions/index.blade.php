@@ -1,5 +1,11 @@
 @extends('layouts.admin')
 @section('content')
+
+<?php
+use App\Region;
+/** @var Region[] $regions */
+?>
+
 @can('region_create')
     <div style="margin-bottom: 10px;" class="row">
         <div class="col-lg-12">
@@ -51,22 +57,17 @@
                             <td>
                                 {{ $region->admArea->name ?? '' }}
                             </td>
-                            <td>
-                                @can('region_show')
-                                    <a class="btn btn-xs btn-primary" href="{{ route('admin.regions.show', $region->id) }}">
-                                        {{ trans('global.view') }}
-                                    </a>
-                                @endcan
+                            <td width="52">
                                 @can('region_edit')
                                     <a class="btn btn-xs btn-info" href="{{ route('admin.regions.edit', $region->id) }}">
-                                        {{ trans('global.edit') }}
+                                        <i class="fas fa-edit"></i>
                                     </a>
                                 @endcan
                                 @can('region_delete')
                                     <form action="{{ route('admin.regions.destroy', $region->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
                                         <input type="hidden" name="_method" value="DELETE">
                                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                        <input type="submit" class="btn btn-xs btn-danger" value="{{ trans('global.delete') }}">
+                                        <button type="submit" class="btn btn-xs btn-danger"><i class="fas fa-trash-alt"></i></button>
                                     </form>
                                 @endcan
                             </td>

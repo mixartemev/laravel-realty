@@ -35,7 +35,7 @@ class Region extends Model
 		'adm_area_id'
 	];
 
-    public function adm_area()
+    public function admArea()
     {
         return $this->belongsTo(AdmArea::class);
     }

@@ -18,7 +18,7 @@ class RegionController extends Controller
     {
         abort_unless(Gate::allows('region_access'), 403);
 
-        $regions = Region::all();
+        $regions = Region::with('admArea')->get();
 
         return view('admin.regions.index', compact('regions'));
     }
@@ -26,8 +26,9 @@ class RegionController extends Controller
     public function create()
     {
         abort_unless(Gate::allows('region_create'), 403);
+        $admAreas = AdmArea::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        return view('admin.regions.create');
+        return view('admin.regions.create', compact('admAreas'));
     }
 
     public function store(StoreRegionRequest $request)
