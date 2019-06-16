@@ -2,7 +2,10 @@
 
 namespace App\Providers;
 
+use Faker\Factory;
+use Faker\Generator;
 use Illuminate\Support\ServiceProvider;
+use Psr\Log\LoggerInterface;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -13,7 +16,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->singleton(Generator::class, function () {
+            return Factory::create('ru_RU');
+        });
     }
 
     /**
@@ -23,7 +28,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->app->alias('bugsnag.logger', \Illuminate\Contracts\Logging\Log::class);
-        $this->app->alias('bugsnag.logger', \Psr\Log\LoggerInterface::class);
+        $this->app->alias('bugsnag.logger', LoggerInterface::class);
     }
 }

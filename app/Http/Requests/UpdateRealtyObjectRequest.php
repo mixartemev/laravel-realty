@@ -3,13 +3,14 @@
 namespace App\Http\Requests;
 
 use App\RealtyObject;
+use Gate;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateRealtyObjectRequest extends FormRequest
 {
     public function authorize()
     {
-        return \Gate::allows('realty_object_edit');
+        return Gate::allows('realty_object_edit');
     }
 
     public function rules()

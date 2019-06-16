@@ -70,6 +70,11 @@ class RealtyObject extends Model
         self::PROFILE_SEPARATE => 'ОСЗ',
     ];
 
+    const CONTRACT_STATUS_SELECT = [
+        '1' => 'Подпишут под клиент',
+        '2' => 'Подписан',
+    ];
+
 	protected $table = 'realty_objects';
 
 	protected $casts = [

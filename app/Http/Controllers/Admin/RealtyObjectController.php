@@ -11,12 +11,17 @@ use App\Http\Requests\UpdateRealtyObjectRequest;
 use App\RealtyObject;
 use App\User;
 use Illuminate\Http\Request;
-use Yajra\DataTables\Facades\DataTables;
+use Yajra\DataTables\DataTables;
 
 class RealtyObjectController extends Controller
 {
     use MediaUploadingTrait;
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @throws \Exception
+     */
     public function index(Request $request)
     {
         if ($request->ajax()) {
@@ -106,7 +111,7 @@ class RealtyObjectController extends Controller
 
         $floors = Floor::all()->pluck('number', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $realtyObject->load('user', 'floor');
+        $realtyObject->load('user');
 
         return view('admin.realtyObjects.edit', compact('users', 'floors', 'realtyObject'));
     }
