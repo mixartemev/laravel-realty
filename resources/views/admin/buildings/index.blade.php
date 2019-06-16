@@ -39,9 +39,11 @@
                     <th>
                         {{ trans('cruds.building.fields.class') }}
                     </th>
-                    <th width="36">
-                        &nbsp;
+                    <th>
+                        {{ trans('cruds.building.fields.release_date') }}
                     </th>
+{{--                    <th width="36">&nbsp;</th>--}}
+                    <th width="64">&nbsp;</th>
                 </tr>
             </thead>
         </table>
@@ -51,20 +53,19 @@
 @section('scripts')
 @parent
 <script>
-    $(function () {
+  $(function () {
   let deleteButtonTrans = '{{ trans('global.datatables.delete') }}';
   let deleteButton = {
     text: deleteButtonTrans,
     url: "{{ route('admin.buildings.massDestroy') }}",
     className: 'btn-danger',
     action: function (e, dt, node, config) {
-      var ids = $.map(dt.rows({ selected: true }).data(), function (entry) {
+      let ids = $.map(dt.rows({ selected: true }).data(), function (entry) {
           return entry.id
       });
 
       if (ids.length === 0) {
         alert('{{ trans('global.datatables.zero_selected') }}');
-
         return
       }
 
@@ -77,7 +78,7 @@
           .done(function () { location.reload() })
       }
     }
-  }
+  };
 
   let dtButtons = $.extend(true, [], $.fn.dataTable.defaults.buttons);
 @can('building_delete')
@@ -99,12 +100,19 @@
         { data: 'floors', name: 'floors' },
         { data: 'type', name: 'type' },
         { data: 'class', name: 'class' },
+        { data: 'release_date', name: 'release_date' },
         { data: 'actions', name: '{{ trans('global.actions') }}' }
     ],
+  //   columnDefs: [
+  //       {
+  //         render: function ( data, type, row ) {
+  //             return '<a href="/buildings/'+row['id']+'">'+data +'</a>';
+  //         },
+  //         targets: 1
+  //       },
+  // ]
   };
-
   $('.datatable').DataTable(dtOverrideGlobals);
-
 });
 
 </script>

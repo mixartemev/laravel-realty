@@ -17,8 +17,13 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property int $region_id Округ / Район подмосковья
  * @property int $metro_station_id Метро
  * @property int $metro_distance Удаленность до метро
- * @property int $type Тип здания
+ * @property int $metro_distance_type Пешком/транспортом
+ * @property int $type Тип
+ * @property string $class Класс
+ * @property Carbon $release_date Ввод в эксплуатацию
  * @property int $area Общая площадь
+ * @property int $floors Этажность
+ * @property string $description Описание
  * @property Carbon $created_at
  * @property Carbon $updated_at
  * @property string $deleted_at
@@ -32,27 +37,38 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class Building extends Model
 {
-	use SoftDeletes;
-	use ModelExtension;
+    use SoftDeletes;
+    use ModelExtension;
 
-	protected $table = 'buildings';
+    protected $table = 'buildings';
 
-	protected $casts = [
-		'region_id' => 'int',
-		'metro_station_id' => 'int',
-		'metro_distance' => 'int',
-		'type' => 'int',
-		'area' => 'int'
-	];
+    protected $casts = [
+        'region_id' => 'int',
+        'metro_station_id' => 'int',
+        'metro_distance' => 'int',
+        'metro_distance_type' => 'int',
+        'type' => 'int',
+        'area' => 'int',
+        'floors' => 'int'
+    ];
 
-	protected $fillable = [
-		'address',
-		'region_id',
-		'metro_station_id',
-		'metro_distance',
-		'type',
-		'area'
-	];
+    protected $dates = [
+        'release_date'
+    ];
+
+    protected $fillable = [
+        'address',
+        'region_id',
+        'metro_station_id',
+        'metro_distance',
+        'metro_distance_type',
+        'type',
+        'class',
+        'release_date',
+        'area',
+        'floors',
+        'description'
+    ];
 
     const TYPE_LIVING = 1;
     const TYPE_MALL = 2;
@@ -69,18 +85,37 @@ class Building extends Model
         self::TYPE_STOCK => 'Склад',
     ];
 
-	public function metro_station()
-	{
-		return $this->belongsTo(MetroStation::class);
-	}
+    const DISTANCE_TYPE_FOOT = 1;
+    const DISTANCE_TYPE_TRANSPORT = 2;
+    const DISTANCE_TYPES = [
+        self::DISTANCE_TYPE_FOOT => 'пешком',
+        self::DISTANCE_TYPE_TRANSPORT => 'на транспорте',
+    ];
 
-	public function region()
-	{
-		return $this->belongsTo(Region::class);
-	}
+    const ROMAN_QUARTER = [
+        1 => 'I',
+        2 => 'II',
+        3 => 'III',
+        4 => 'IV',
+    ];
 
-	public function realty_objects()
-	{
-		return $this->hasMany(RealtyObject::class);
-	}
+    public function getFormattedReleaseDate()
+    {
+        return $this->release_date->year.' '.self::ROMAN_QUARTER[$this->release_date->quarter];
+    }
+
+    public function metro_station()
+    {
+        return $this->belongsTo(MetroStation::class);
+    }
+
+    public function region()
+    {
+        return $this->belongsTo(Region::class);
+    }
+
+    public function realty_objects()
+    {
+        return $this->hasMany(RealtyObject::class);
+    }
 }

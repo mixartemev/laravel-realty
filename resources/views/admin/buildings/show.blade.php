@@ -1,6 +1,11 @@
 @extends('layouts.admin')
 @section('content')
 
+<?php
+use App\Building;
+/** @var Building $building */
+?>
+
 <div class="card">
     <div class="card-header">
         {{ trans('global.show') }} {{ trans('cruds.building.title') }}
@@ -31,7 +36,7 @@
                             {{ trans('cruds.building.fields.metro_station') }}
                         </th>
                         <td>
-                            {{ $building->metro_station->name ?? '' }}
+                            {{ $building->metro_station->name ? "{$building->metro_station->name} - {$building->metro_distance}  мин. ".App\Building::DISTANCE_TYPES[$building->metro_distance_type] : '' }}
                         </td>
                     </tr>
                     <tr>
@@ -39,15 +44,31 @@
                             {{ trans('cruds.building.fields.type') }}
                         </th>
                         <td>
-                            {{ App\Building::TYPE_SELECT[$building->type] }}
+                            {{ App\Building::TYPES[$building->type] }}
                         </td>
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.building.fields.profile') }}
+                            {{ trans('cruds.building.fields.class') }}
                         </th>
                         <td>
-                            {{ App\Building::PROFILE_SELECT[$building->profile] }}
+                            {{ $building->class }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.building.fields.release_date') }}
+                        </th>
+                        <td>
+                            {{ $building->getFormattedReleaseDate() }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.building.fields.description') }}
+                        </th>
+                        <td>
+                            {{ $building->description }}
                         </td>
                     </tr>
                 </tbody>

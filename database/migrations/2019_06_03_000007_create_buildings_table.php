@@ -22,7 +22,7 @@ class CreateBuildingsTable extends Migration
             $table->unsignedTinyInteger('metro_distance_type')->nullable()->comment('Пешком/транспортом');
             $table->unsignedTinyInteger('type')->comment('Тип');
             $table->enum('class', ['A','B','C','D'])->nullable()->comment('Класс');
-            $table->date('realise_date')->nullable()->comment('Ввод в эксплуатацию');
+            $table->date('release_date')->nullable()->comment('Ввод в эксплуатацию');
             $table->unsignedSmallInteger('area')->nullable()->comment('Общая площадь');
             $table->unsignedTinyInteger('floors')->nullable()->comment('Этажность');
             $table->text('description')->nullable()->comment('Описание');

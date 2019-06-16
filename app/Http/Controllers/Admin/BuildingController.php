@@ -13,15 +13,18 @@ use DataTables;
 use Exception;
 use Gate;
 use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Date;
 use Illuminate\View\View;
+use Yajra\DataTables\EloquentDataTable;
 
 class BuildingController extends Controller
 {
     /**
      * @param Request $request
-     * @return Factory|View
+     * @return Factory|JsonResponse|View
      * @throws Exception
      */
     public function index(Request $request)
@@ -29,6 +32,7 @@ class BuildingController extends Controller
         if ($request->ajax()) {
             $query = Building::query();
             $query->with(['region', 'metro_station']);
+            /** @var EloquentDataTable $table */
             $table = Datatables::of($query);
 
             $table->addColumn('placeholder', '&nbsp;');
@@ -48,9 +52,10 @@ class BuildingController extends Controller
                     'row'
                 ));
             });
-            $table->editColumn('address', function ($row) {
-                return $row->address ? $row->address : "";
-            });
+//            $table->editColumn('address', function ($row) {
+//                /** @var Building $row */
+//                return $row->address ? '<a href="'.route('admin.buildings.show', $row->id).'">'.$row->address.'</a>' : "";
+//            });
             $table->editColumn('region.region', function ($row) {
                 return $row->region_id ? $row->region->name : '';
             });
@@ -63,8 +68,13 @@ class BuildingController extends Controller
             $table->editColumn('type', function ($row) {
                 return $row->type ? Building::TYPES[$row->type] : '';
             });
+            $now = Date::now();
+            $table->editColumn('release_date', function ($row) use ($now) {
+                /** @var Building $row */
+                return $row->release_date ? ($row->release_date > $now ? $row->getFormattedReleaseDate() : trans('cruds.building.fields.release_date_past')) : '';
+            });
 
-            $table->rawColumns(['actions', 'placeholder', 'region', 'metro_station']);
+            $table->rawColumns(['actions', 'placeholder', 'region', 'metro_station'/*, 'address'*/]);
 
             return $table->make(true);
         }
@@ -120,7 +130,7 @@ class BuildingController extends Controller
 
         $building->load('region', 'metro_station');
 
-        return view('admin.buildings.show', compact('building'));
+        return view('admin.buildings.show', ['building' => $building]);
     }
 
     /**

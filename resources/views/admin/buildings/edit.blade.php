@@ -1,6 +1,11 @@
 @extends('layouts.admin')
 @section('content')
 
+<?php
+use App\Building;
+/** @var Building $building */
+?>
+
 <div class="card">
     <div class="card-header">
         {{ trans('global.edit') }} {{ trans('cruds.building.title_singular') }}
@@ -53,7 +58,7 @@
                 <select id="type" name="type" class="form-control" required>
                     <option value="" disabled {{ old('type', null) === null ? 'selected' : '' }}>{{ trans('global.pleaseSelect') }}</option>
                     @foreach(App\Building::TYPES as $key => $label)
-                        <option value="{{ $key }}" {{ old('type', $building->type) === (string)$key ? 'selected' : '' }}>{{ $label }}</option>
+                        <option value="{{ $key }}" {{ (isset($building) && $building->type ? $building->type : old('type')) == $key ? 'selected' : '' }}>{{ $label }}</option>
                     @endforeach
                 </select>
                 @if($errors->has('type'))
@@ -62,19 +67,43 @@
                     </p>
                 @endif
             </div>
-            <div class="form-group {{ $errors->has('profile') ? 'has-error' : '' }}">
-                <label for="profile">{{ trans('cruds.building.fields.profile') }}*</label>
-                <select id="profile" name="profile" class="form-control" required>
-                    <option value="" disabled {{ old('profile', null) === null ? 'selected' : '' }}>{{ trans('global.pleaseSelect') }}</option>
+            <div class="form-group {{ $errors->has('class') ? 'has-error' : '' }}">
+                <label for="class">{{ trans('cruds.building.fields.class') }}*</label>
+                <select id="class" name="class" class="form-control" required>
+                    <option value="" disabled {{ old('class', null) === null ? 'selected' : '' }}>{{ trans('global.pleaseSelect') }}</option>
                     @foreach($building->getEnumValues('class') as $key => $label)
-                        <option value="{{ $key }}" {{ old('profile', $building->profile) === (string)$key ? 'selected' : '' }}>{{ $label }}</option>
+                        <option value="{{ $key }}" {{ old('class', $building->class) == $key ? 'selected' : '' }}>{{ $label }}</option>
                     @endforeach
                 </select>
-                @if($errors->has('profile'))
+                @if($errors->has('class'))
                     <p class="help-block">
-                        {{ $errors->first('profile') }}
+                        {{ $errors->first('class') }}
                     </p>
                 @endif
+            </div>
+            <div class="form-group {{ $errors->has('release_date') ? 'has-error' : '' }}">
+                <label for="release_date">{{ trans('cruds.building.fields.release_date') }}</label>
+                <input type="text" id="release_date" name="release_date" class="form-control date" value="{{ old('release_date', isset($building) ? $building->release_date : '') }}">
+                @if($errors->has('release_date'))
+                    <p class="help-block">
+                        {{ $errors->first('release_date') }}
+                    </p>
+                @endif
+                <p class="helper-block">
+                    {{ trans('cruds.building.fields.release_date_helper') }}
+                </p>
+            </div>
+            <div class="form-group {{ $errors->has('description') ? 'has-error' : '' }}">
+                <label for="description">{{ trans('cruds.building.fields.description') }}</label>
+                <textarea id="description" name="description" class="form-control ">{{ old('description', isset($building) ? $building->description : '') }}</textarea>
+                @if($errors->has('description'))
+                    <p class="help-block">
+                        {{ $errors->first('description') }}
+                    </p>
+                @endif
+                <p class="helper-block">
+                    {{ trans('cruds.building.fields.description_helper') }}
+                </p>
             </div>
             <div>
                 <input class="btn btn-danger" type="submit" value="{{ trans('global.save') }}">
