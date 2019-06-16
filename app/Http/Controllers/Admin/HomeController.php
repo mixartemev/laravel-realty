@@ -16,10 +16,12 @@ class HomeController
             'group_by_field'        => 'created_at',
             'group_by_period'       => 'day',
             'aggregate_function'    => 'count',
-            'filter_field'          => 'created_at',
+//            'filter_field'          => 'created_at',
+//            'filter_days'           => '30',
             'group_by_field_format' => 'd.m.Y H:i:s',
             'column_class'          => 'col-md-8',
             'entries_number'        => '5',
+            'continuous_time'       => true
         ];
         $objectsCountLineChart = new LaravelChart($settings1);
 
