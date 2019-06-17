@@ -17,29 +17,36 @@ use Spatie\MediaLibrary\Models\Media;
  * Class RealtyObject
  *
  * @property int $id
+ * @property int $type Тип площади
+ * @property int $profile Классификация помещения
+ * @property int $cost Стоимость
+ * @property int $currency Валюта
  * @property int $user_id Брокер
  * @property int $contact_id Контакт
  * @property int $building_id Здание
  * @property Carbon $planned_contact Запланированная дата следующего контакта
  * @property string $cadastral_numb Кадастровый номер
- * @property float $area Площадь
- * @property int $floor Этаж
  * @property int $power Электро мощность
- * @property float $ceiling Высота потолков
- * @property int $profile Профиль помещения
  * @property int $contract_status Подписанность договора
- * @property int $cost Стоимость
- * @property int $commission Комиссия
  * @property string $description Описание
+ * @property int $commission Комиссия
+ * @property int $payback Окупаемость
+ * @property int $bargain_limit Торг до
+
+ * @property Carbon $created_at
+ * @property Carbon $updated_at
+ * @property Carbon $deleted_at
  *
- * @property Carbon|null $created_at
- * @property Carbon|null $updated_at
- * @property Carbon|null $deleted_at
+ * @property Building $building
+ * @property Contact $contact
+ * @property User $user
+ * @property Collection|Floor[] $floors
+ * @property RentObject $rent_object
+ * @property SaleObject $sale_object
  *
  * @property-read mixed $docs
  * @property-read mixed $photos
  * @property-read Collection|Media[] $media
- * @property-read User $user
  *
  * @method static bool|null forceDelete()
  * @method static Builder|RealtyObject newModelQuery()
@@ -65,10 +72,6 @@ use Spatie\MediaLibrary\Models\Media;
  * @method static Builder|RealtyObject whereUserId($value)
  * @method static Builder|RealtyObject withTrashed()
  * @method static Builder|RealtyObject withoutTrashed()
- *
- * @property Building $building
- * @property Contact $contact
- * @property Collection|Floor[] $floors
  *
  * @mixin Eloquent
  * @package App
@@ -121,20 +124,6 @@ class RealtyObject extends Model implements HasMedia
 
 	protected $table = 'realty_objects';
 
-	protected $casts = [
-		'user_id' => 'int',
-		'contact_id' => 'int',
-		'building_id' => 'int',
-		'area' => 'float',
-		'floor' => 'int',
-		'power' => 'int',
-		'ceiling' => 'float',
-		'profile' => 'int',
-		'contract_status' => 'int',
-		'cost' => 'int',
-		'commission' => 'int'
-	];
-
     protected $dates = [
         'updated_at',
         'created_at',
@@ -142,23 +131,68 @@ class RealtyObject extends Model implements HasMedia
         'planned_contact',
     ];
 
-	protected $fillable = [
-		'user_id',
-		'contact_id',
-		'building_id',
-		'planned_contact',
-		'cadastral_numb',
-		'area',
-		'floor',
-		'power',
-		'ceiling',
-		'profile',
+    protected $casts = [
+        'type' => 'int',
+        'profile' => 'int',
+        'cost' => 'int',
+        'currency' => 'int',
+        'user_id' => 'int',
+        'contact_id' => 'int',
+        'building_id' => 'int',
+        'power' => 'int',
+        'contract_status' => 'int',
+        'commission' => 'int',
+        'payback' => 'int',
+        'bargain_limit' => 'int'
+    ];
+
+    protected $fillable = [
+        'type',
+        'profile',
+        'cost',
+        'currency',
+        'user_id',
+        'contact_id',
+        'building_id',
         'planned_contact',
-		'contract_status',
-		'cost',
-		'commission',
-		'description'
-	];
+        'cadastral_numb',
+        'power',
+        'contract_status',
+        'description',
+        'commission',
+        'payback',
+        'bargain_limit'
+    ];
+
+    public function building()
+    {
+        return $this->belongsTo(Building::class);
+    }
+
+    public function contact()
+    {
+        return $this->belongsTo(Contact::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function floors()
+    {
+        return $this->hasMany(Floor::class);
+    }
+
+    public function rent_object()
+    {
+        return $this->hasOne(RentObject::class, 'id');
+    }
+
+    public function sale_object()
+    {
+        return $this->hasOne(SaleObject::class, 'id');
+    }
 
     public function getPlannedContactAttribute($value)
     {
@@ -185,24 +219,4 @@ class RealtyObject extends Model implements HasMedia
     {
         return $this->getMedia('docs');
     }
-
-	public function building()
-	{
-		return $this->belongsTo(Building::class);
-	}
-
-	public function contact()
-	{
-		return $this->belongsTo(Contact::class);
-	}
-
-	public function user()
-	{
-		return $this->belongsTo(User::class);
-	}
-
-	public function floors()
-	{
-		return $this->hasMany(Floor::class);
-	}
 }

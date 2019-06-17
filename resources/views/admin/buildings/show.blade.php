@@ -8,7 +8,7 @@ use App\Building;
 
 <div class="card">
     <div class="card-header">
-        {{ trans('global.show') }} {{ trans('cruds.building.title') }}
+        {{ trans('cruds.building.title_singular') }}: {{ $building->address }}
     </div>
 
     <div class="card-body">

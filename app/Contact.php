@@ -13,13 +13,12 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $name Наименование ЮЛ/ФЛ
  * @property string $brand_name Название бренда
  * @property string $position Должность
- * @property int $phone Телефон
+ * @property string $phone Телефон
  * @property string $email Email
  * @property string $web Веб сайт
  * @property string $additional_contact Доп. контакт
- * @property string $company_description Описание компании
- * @property bool $commission Платит комиссию
- * @property int $requisites Реквизиты
+ * @property string $description Описание компании
+ * @property string $requisites Реквизиты
  *
  * @property Collection|Order[] $orders
  * @property Collection|RealtyObject[] $realty_objects
@@ -33,24 +32,17 @@ class Contact extends Model
 
 	public $timestamps = false;
 
-	protected $casts = [
-		'phone' => 'int',
-		'commission' => 'bool',
-		'requisites' => 'int'
-	];
-
-	protected $fillable = [
-		'name',
-		'brand_name',
-		'position',
-		'phone',
-		'email',
-		'web',
-		'additional_contact',
-		'company_description',
-		'commission',
-		'requisites'
-	];
+    protected $fillable = [
+        'name',
+        'brand_name',
+        'position',
+        'phone',
+        'email',
+        'web',
+        'additional_contact',
+        'description',
+        'requisites'
+    ];
 
 	public function orders()
 	{

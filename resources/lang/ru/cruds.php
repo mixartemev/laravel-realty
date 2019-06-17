@@ -136,7 +136,7 @@ return [
         ],
     ],
     'floor'          => [
-        'title'          => 'Этаж',
+        'title'          => 'Этажи',
         'title_singular' => 'Этаж',
         'fields'         => [
             'id'                => 'ID',
@@ -147,8 +147,8 @@ return [
             'area_helper'       => '',
             'ceiling'           => 'Высота потолков',
             'ceiling_helper'    => '',
-            'building'          => 'Здание',
-            'building_helper'   => '',
+            'type'              => 'Тип',
+            'type_helper'       => '',
             'created_at'        => 'Created At',
             'created_at_helper' => '',
             'updated_at'        => 'Updated At',
@@ -163,8 +163,8 @@ return [
         'fields'         => [],
     ],
     'realtyObject'   => [
-        'title'          => 'Объект',
-        'title_singular' => 'Объект',
+        'title'          => 'Блоки',
+        'title_singular' => 'Блок',
         'fields'         => [
             'id'                     => 'ID',
             'id_helper'              => '',
@@ -210,6 +210,7 @@ return [
             'deleted_at_helper'      => '',
             'floor'                  => 'Этаж здания',
             'floor_helper'           => '',
+            'contact_requisites'     => 'Реквизиты',
         ],
     ],
     'auditLog'       => [
