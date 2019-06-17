@@ -20,6 +20,8 @@ $factory->define(RealtyObject::class, function (Faker $faker) {
         'cost' => $faker->numberBetween($cost*0.5, $cost*5),
         'type' => $faker->randomElement([1,2,3,4,5,6,7]),
         'profile' => $faker->randomElement([1,2,3,4]),
+        'power' => $faker->numberBetween(100,9000),
+        'description' => $faker->realText(),
         'cadastral_numb' => $faker->domainWord.$faker->randomNumber(),
         'contract_status' => $faker->randomElement([1,2]),
         'user_id' => $faker->randomElement(User::pluck('id')->toArray()),

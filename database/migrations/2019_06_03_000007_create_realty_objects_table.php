@@ -25,9 +25,9 @@ class CreateRealtyObjectsTable extends Migration
             $table->string('cadastral_numb')->nullable()->comment('Кадастровый номер');
             $table->smallInteger('power')->nullable()->comment('Электро мощность');
             $table->tinyInteger('contract_status')->default(1)->comment('Подписанность договора');
-            $table->tinyInteger('commission')->nullable()->comment('Комиссия');
             $table->text('description')->nullable()->comment('Описание');
 
+            $table->tinyInteger('commission')->nullable()->comment('Комиссия');
             $table->integer('payback')->nullable()->comment('Окупаемость');
             $table->integer('bargain_limit')->nullable()->comment('Торг до');
 
