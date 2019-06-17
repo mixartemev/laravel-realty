@@ -110,6 +110,15 @@ class RealtyObject extends Model implements HasMedia
         '2' => 'Подписан',
     ];
 
+    const CUR_RUB = 1;
+    const CUR_USD = 2;
+    const CUR_EUR = 3;
+    const CURS = [
+        self::CUR_RUB => '₽',
+        self::CUR_USD => '$',
+        self::CUR_EUR => '€',
+    ];
+
 	protected $table = 'realty_objects';
 
 	protected $casts = [
@@ -156,10 +165,10 @@ class RealtyObject extends Model implements HasMedia
         return $value ? Carbon::parse($value)->format(config('panel.date_format')) : null;
     }
 
-    public function setPlannedContactAttribute($value)
-    {
-        $this->attributes['planned_contact'] = $value ? Carbon::createFromFormat(config('panel.date_format'), $value)->format('Y-m-d') : null;
-    }
+//    public function setPlannedContactAttribute($value)
+//    {
+//        $this->attributes['planned_contact'] = $value ? Carbon::createFromFormat(config('panel.date_format'), $value)->format('Y-m-d') : null;
+//    }
 
     public function getphotosAttribute()
     {

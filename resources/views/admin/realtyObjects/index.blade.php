@@ -22,23 +22,37 @@
 
                     </th>
                     <th>
-                        {{ trans('cruds.realtyObject.fields.user') }}
+                        {{ trans('cruds.realtyObject.fields.type') }}
                     </th>
                     <th>
-                        {{ trans('cruds.realtyObject.fields.cadastral_numb') }}
+                        {{ trans('cruds.realtyObject.fields.profile') }}
                     </th>
-                    <th>
-                        {{ trans('cruds.realtyObject.fields.area') }}
-                    </th>
-                    <th>
-                        {{ trans('cruds.realtyObject.fields.commission') }}
-                    </th>
+
+{{--                    <th>--}}
+{{--                        {{ trans('cruds.realtyObject.fields.planned_contact') }}--}}
+{{--                    </th>--}}
+
                     <th>
                         {{ trans('cruds.realtyObject.fields.cost') }}
                     </th>
 {{--                    <th>--}}
 {{--                        {{ trans('cruds.realtyObject.fields.cost_m') }}--}}
 {{--                    </th>--}}
+
+                    <th>
+                        {{ trans('cruds.realtyObject.fields.cadastral_numb') }}
+                    </th>
+
+                    <th>
+                        {{ trans('cruds.realtyObject.fields.user') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.realtyObject.fields.contact') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.realtyObject.fields.building') }}
+                    </th>
+
                     <th width="64">
                         &nbsp;
                     </th>
@@ -58,12 +72,12 @@
     url: "{{ route('admin.realty-objects.massDestroy') }}",
     className: 'btn-danger',
     action: function (e, dt, node, config) {
-      var ids = $.map(dt.rows({ selected: true }).data(), function (entry) {
+      let ids = $.map(dt.rows({ selected: true }).data(), function (entry) {
           return entry.id
       });
 
       if (ids.length === 0) {
-        alert('{{ trans('global.datatables.zero_selected') }}')
+        alert('{{ trans('global.datatables.zero_selected') }}');
 
         return
       }
@@ -77,11 +91,11 @@
           .done(function () { location.reload() })
       }
     }
-  }
+  };
 
-  let dtButtons = $.extend(true, [], $.fn.dataTable.defaults.buttons)
+  let dtButtons = $.extend(true, [], $.fn.dataTable.defaults.buttons);
 @can('realty_object_delete')
-  dtButtons.push(deleteButton)
+  dtButtons.push(deleteButton);
 @endcan
 
   let dtOverrideGlobals = {
@@ -93,13 +107,21 @@
     ajax: "{{ route('admin.realty-objects.index') }}",
     columns: [
         { data: 'placeholder', name: 'placeholder' },
-        { data: 'user.user', name: 'user.name' },
-        { data: 'cadastral_numb', name: 'cadastral_numb' },
-        { data: 'area', name: 'area' },
-        { data: 'commission', name: 'commission' },
-        { data: 'cost', name: 'cost' },
+
+        { data: 'type', name: 'type' },
+        { data: 'profile', name: 'profile' },
+
+        // { data: 'planned_contact', name: 'planned_contact',},
+
+        { data: 'cost', name: 'cost'/*, type: 'num-fmt'*/ },
         // { data: 'cost_m', name: 'cost_m' },
-        // { data: 'floor.floor', name: 'floor.number' },
+
+        { data: 'cadastral_numb', name: 'cadastral_numb' },
+
+        { data: 'user.user', name: 'user.name' },
+        { data: 'contact.contact', name: 'contact.name' },
+        { data: 'building.building', name: 'building.name' },
+
         { data: 'actions', name: '{{ trans('global.actions') }}' }
     ],
   };

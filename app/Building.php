@@ -104,10 +104,10 @@ class Building extends Model
         return $this->release_date ? \Illuminate\Support\Carbon::parse($this->release_date)->format(config('panel.date_format')) : null;
     }
 
-    public function setReleaseDateAttribute($value)
-    {
-        $this->attributes['release_date'] = $value ? Carbon::createFromFormat(config('panel.date_format'), $value)->format('Y-m-d') : null;
-    }
+//    public function setReleaseDateAttribute($value)
+//    {
+//        $this->attributes['release_date'] = $value ? Carbon::createFromFormat(config('panel.date_format'), $value)->format('Y-m-d') : null;
+//    }
 
     public function getFormattedReleaseDate()
     {

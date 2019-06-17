@@ -30,7 +30,7 @@ class RealtyObjectController extends Controller
     {
         if ($request->ajax()) {
             $query = RealtyObject::query();
-            $query->with(['user']);
+            $query->with(['user', 'contact', 'building']);
             $table = Datatables::of($query);
 
             $table->addColumn('placeholder', '&nbsp;');
@@ -50,26 +50,31 @@ class RealtyObjectController extends Controller
                     'row'
                 ));
             });
+
             $table->editColumn('user.user', function ($row) {
                 return $row->user_id ? $row->user->name : '';
             });
-            $table->editColumn('cadastral_numb', function ($row) {
-                return $row->cadastral_numb ? $row->cadastral_numb : "";
+            $table->editColumn('contact.contact', function ($row) {
+                return $row->contact_id ? $row->contact->name : '';
             });
-            $table->editColumn('area', function ($row) {
-                return $row->area ? $row->area : "";
+            $table->editColumn('building.building', function ($row) {
+                return $row->building_id ? $row->building->address : '';
             });
-            $table->editColumn('commission', function ($row) {
-                return $row->commission ? $row->commission : "";
+
+            $table->editColumn('type', function ($row) {
+                return RealtyObject::TYPES[$row->type];
+            });
+            $table->editColumn('profile', function ($row) {
+                return RealtyObject::PROFILES[$row->profile];
             });
             $table->editColumn('cost', function ($row) {
-                return $row->cost ? $row->cost : "";
+                return number_format($row->cost, 0, '.', ' ').' '.RealtyObject::CURS[$row->currency];
             });
 //            $table->editColumn('cost_m', function ($row) {
 //                return $row->cost_m ? $row->cost_m : "";
 //            });
 
-            $table->rawColumns(['actions', 'placeholder', 'user']);
+            $table->rawColumns(['actions', 'placeholder', 'user', 'contact', 'building']);
 
             return $table->make(true);
         }
