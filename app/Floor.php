@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Eloquent;
 use Illuminate\Database\Eloquent\Model;
 
@@ -14,6 +15,9 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $area Площадь на этаже
  * @property float $ceiling Высота потолков
  * @property int $realty_object_id Блок
+ * @property Carbon $created_at
+ * @property Carbon $updated_at
+ * @property Carbon $deleted_at
  *
  * @property RealtyObject $realty_object
  *

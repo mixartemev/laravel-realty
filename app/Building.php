@@ -26,7 +26,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string $description Описание
  * @property Carbon $created_at
  * @property Carbon $updated_at
- * @property string $deleted_at
+ * @property Carbon $deleted_at
  *
  * @property MetroStation $metro_station
  * @property Region $region

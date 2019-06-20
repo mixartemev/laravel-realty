@@ -10,7 +10,7 @@ class CreateRegionsTable extends Migration
         Schema::create('regions', function (Blueprint $table) {
             $table->smallIncrements('id');
             $table->string('name')->unique()->comment('Район');;
-            $table->unsignedTinyInteger('adm_area_id')->nullable()->comment('Административный округ');;
+            $table->unsignedTinyInteger('adm_area_id')->nullable()->comment('Административный округ');
             $table->foreign('adm_area_id', 'regions_adm_area_id_fkey')
                 ->references('id')
                 ->on('adm_areas')
