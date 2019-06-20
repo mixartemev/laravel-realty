@@ -149,6 +149,7 @@ $contact = $realtyObject->contact;
                     </tr>
                 </tbody>
             </table>
+
             @if($floors = $realtyObject->floors)
                 <div class="card">
                     <div class="card-header">
@@ -190,6 +191,9 @@ $contact = $realtyObject->contact;
                     </div>
                 </div>
             @endif
+
+            @include ('admin.buildings.show_inner', ['building' => $realtyObject->building])
+
             <a style="margin-top:20px;" class="btn btn-default" href="{{ url()->previous() }}">
                 Back
             </a>
