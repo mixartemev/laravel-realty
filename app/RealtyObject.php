@@ -199,10 +199,10 @@ class RealtyObject extends Model implements HasMedia
         return $value ? Carbon::parse($value)->format(config('panel.date_format')) : null;
     }
 
-//    public function setPlannedContactAttribute($value)
-//    {
-//        $this->attributes['planned_contact'] = $value ? Carbon::createFromFormat(config('panel.date_format'), $value)->format('Y-m-d') : null;
-//    }
+    public function setPlannedContactAttribute($value)
+    {
+        $this->attributes['planned_contact'] = $value ? Carbon::createFromFormat(config('panel.date_format'), $value)->format('Y-m-d') : null;
+    }
 
     public function getphotosAttribute()
     {
@@ -218,5 +218,19 @@ class RealtyObject extends Model implements HasMedia
     public function getdocsAttribute()
     {
         return $this->getMedia('docs');
+    }
+
+    public function getCostM()
+    {
+        if ($this->cost && $this->floors()->count()) {
+            $area = 0;
+            $this->floors()->each(function ($floor) use (&$area) {
+                /** @var Floor $floor */
+                $area += $floor->area;
+            });
+
+            return round($this->cost /** ($this->dealType > 1 ? 12 : 1)*/ / $area, 1);
+        }
+        return null;
     }
 }

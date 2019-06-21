@@ -27,18 +27,8 @@ class UpdateRealtyObjectRequest extends FormRequest
             'cadastral_numb'  => [
                 'max:255',
             ],
-            'area'            => [
-                'required',
-            ],
-            'contract_status' => [
-                'required',
-            ],
             'commission'      => [
                 'max:500',
-            ],
-            'floor_id'        => [
-                'required',
-                'integer',
             ],
         ];
     }
