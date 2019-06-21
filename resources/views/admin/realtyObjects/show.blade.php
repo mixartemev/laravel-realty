@@ -158,35 +158,43 @@ $contact = $realtyObject->contact;
 
                     <div class="card-body">
                         @foreach ($floors as $floor)
-                            <h5>{{ trans('cruds.floor.title_singular') }} #{{ $floor->number }}</h5>
-                            <table class="table table-bordered table-striped">
-                                <tbody>
-                                <tr>
-                                    <th>
-                                        {{ trans('cruds.floor.fields.type') }}
-                                    </th>
-                                    <td>
-                                        {{ \App\Floor::TYPES[$floor->type] }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>
-                                        {{ trans('cruds.floor.fields.area') }}
-                                    </th>
-                                    <td>
-                                        {{ number_format($floor->area, 0, '.', ' ') }} м<sup>2</sup>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>
-                                        {{ trans('cruds.floor.fields.ceiling') }} м
-                                    </th>
-                                    <td>
-                                        {{ $floor->ceiling }}
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
+                            <div class="card">
+                                <div class="card-header">
+                                    {{ trans('cruds.floor.title_singular') }} #{{ $floor->number }}
+                                </div>
+
+                                <div class="card-body">
+                                    <h5></h5>
+                                    <table class="table table-bordered table-striped">
+                                        <tbody>
+                                        <tr>
+                                            <th>
+                                                {{ trans('cruds.floor.fields.type') }}
+                                            </th>
+                                            <td>
+                                                {{ \App\Floor::TYPES[$floor->type] }}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>
+                                                {{ trans('cruds.floor.fields.area') }}
+                                            </th>
+                                            <td>
+                                                {{ number_format($floor->area, 0, '.', ' ') }} м<sup>2</sup>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>
+                                                {{ trans('cruds.floor.fields.ceiling') }} м
+                                            </th>
+                                            <td>
+                                                {{ $floor->ceiling }}
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                         @endforeach
                     </div>
                 </div>
