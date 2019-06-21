@@ -202,9 +202,11 @@ $contact = $realtyObject->contact;
 
             @include ('admin.buildings.show_inner', ['building' => $realtyObject->building])
 
-            <a style="margin-top:20px;" class="btn btn-default" href="{{ url()->previous() }}">
-                Back
-            </a>
+            @if (Route::is('admin.realty-objects.show'))
+                <a style="margin-top:20px;" class="btn btn-default" href="{{ url()->previous() }}">
+                    {{ trans('global.back_to_list') }}
+                </a>
+            @endif
         </div>
     </div>
 </div>

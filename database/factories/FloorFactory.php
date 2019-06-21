@@ -11,7 +11,7 @@ $factory->define(Floor::class, function (Faker $faker) {
     /** @var RealtyObject $block */
     $block = factory(RealtyObject::class)->create();
     return [
-        'number' => $faker->numberBetween(1, $block->building->floors),
+        'number' => $faker->numberBetween(0, $block->building->floors),
         'type' => $faker->randomElement([1,2,3,4,5,6,7]),
         'area' => $faker->randomFloat(1,22,6000),
         'ceiling' => $faker->randomFloat(1,2,6),

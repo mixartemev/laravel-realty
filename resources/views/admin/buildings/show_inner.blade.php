@@ -5,7 +5,7 @@ use App\Building;
 
 <div class="card">
     <div class="card-header">
-        {{ trans('cruds.building.title_singular') }}: {{ $building->address }}
+        {{ trans('cruds.building.title_singular') }}: {{ $building->id }}
     </div>
 
     <div class="card-body">
@@ -60,14 +60,16 @@ use App\Building;
                             {{ $building->floors }}
                         </td>
                     </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.building.fields.release_date') }}
-                        </th>
-                        <td>
-                            {{ $building->getFormattedReleaseDate() }}
-                        </td>
-                    </tr>
+                    @if ($building->release_date)
+                        <tr>
+                            <th>
+                                {{ trans('cruds.building.fields.release_date') }}
+                            </th>
+                            <td>
+                                {{ $building->getFormattedReleaseDate() }}
+                            </td>
+                        </tr>
+                    @endif
                     <tr>
                         <th>
                             {{ trans('cruds.building.fields.description') }}
@@ -78,9 +80,11 @@ use App\Building;
                     </tr>
                 </tbody>
             </table>
-            <a style="margin-top:20px;" class="btn btn-default" href="{{ url()->previous() }}">
-                Back
-            </a>
+            @if (Route::is('admin.buildings.show'))
+                <a style="margin-top:20px;" class="btn btn-default" href="{{ url()->previous() }}">
+                    {{ trans('global.back_to_list') }}
+                </a>
+            @endif
         </div>
     </div>
 </div>

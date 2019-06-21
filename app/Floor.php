@@ -38,13 +38,13 @@ class Floor extends Model
     const TYPE_ROOF = 6;
     const TYPE_GROUND_FLOOR = 7;
     const TYPES = [
-        'этаж',
-        'антресоль',
-        'чердак',
-        'подвал',
-        'мансарда',
-        'крыша',
-        'цоколь',
+        self::TYPE_GENERAL => 'этаж',
+        self::TYPE_MEZZANINE => 'антресоль',
+        self::TYPE_ATTIC => 'чердак',
+        self::TYPE_BASEMENT => 'подвал',
+        self::TYPE_MANSARD => 'мансарда',
+        self::TYPE_ROOF => 'крыша',
+        self::TYPE_GROUND_FLOOR => 'цоколь',
     ];
 
     protected $casts = [

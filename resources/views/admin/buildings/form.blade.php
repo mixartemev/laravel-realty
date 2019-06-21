@@ -40,6 +40,31 @@ use App\Building;
         </p>
     @endif
 </div>
+<div class="form-group {{ $errors->has('metro_distance') ? 'has-error' : '' }}">
+    <label for="floors">{{ trans('cruds.building.fields.metro_distance') }}</label>
+    <input type="number" id="metro_distance" name="metro_distance" class="form-control" value="{{ old('metro_distance', isset($building) ? $building->metro_distance : '') }}" step="1">
+    @if($errors->has('metro_distance'))
+        <p class="help-block">
+            {{ $errors->first('metro_distance') }}
+        </p>
+    @endif
+    <p class="helper-block">
+        {{ trans('cruds.building.fields.metro_distance_helper') }}
+    </p>
+</div>
+<div class="form-group {{ $errors->has('metro_distance_type') ? 'has-error' : '' }}">
+    <label for="metro_station">{{ trans('cruds.building.fields.metro_distance_type') }}</label>
+    <select name="metro_distance_type" id="metro_station" class="form-control select2">
+        @foreach(\App\Building::DISTANCE_TYPES as $id => $metro_distance_type)
+            <option value="{{ $id }}" {{ (isset($building) && $building->metro_distance_type ? $building->metro_distance_type : old('metro_distance_type')) == $id ? 'selected' : '' }}>{{ $metro_distance_type }}</option>
+        @endforeach
+    </select>
+    @if($errors->has('metro_distance_type'))
+        <p class="help-block">
+            {{ $errors->first('metro_distance_type') }}
+        </p>
+    @endif
+</div>
 <div class="form-group {{ $errors->has('type') ? 'has-error' : '' }}">
     <label for="type">{{ trans('cruds.building.fields.type') }}*</label>
     <select id="type" name="type" class="form-control" required>
