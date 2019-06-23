@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Building;
+use App\Contact;
 use App\Floor;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Traits\MediaUploadingTrait;
@@ -115,12 +117,13 @@ class RealtyObjectController extends Controller
         abort_unless(Gate::allows('realty_object_edit'), 403);
 
         $users = User::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
-
-        $floors = Floor::all()->pluck('number', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $contacts = Contact::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $buildings = Building::all()->pluck('address', 'id')->prepend(trans('global.pleaseSelect'), '');
+        //$floors = Floor::all()->pluck('number', 'id')->prepend(trans('global.pleaseSelect'), '');
 
         $realtyObject->load('user');
 
-        return view('admin.realtyObjects.edit', compact('users', 'floors', 'realtyObject'));
+        return view('admin.realtyObjects.edit', compact('users', 'contacts', 'buildings', 'realtyObject'));
     }
 
     public function update(UpdateRealtyObjectRequest $request, RealtyObject $realtyObject)

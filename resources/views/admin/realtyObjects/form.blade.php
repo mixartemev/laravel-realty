@@ -43,6 +43,32 @@ use App\RealtyObject;
         </p>
     @endif
 </div>
+<div class="form-group {{ $errors->has('contact_id') ? 'has-error' : '' }}">
+    <label for="contact">{{ trans('cruds.realtyObject.fields.contact') }}*</label>
+    <select name="contact_id" id="contact" class="form-control select2" required>
+        @foreach($contacts as $id => $contact)
+            <option value="{{ $id }}" {{ (isset($realtyObject) && $realtyObject->contact ? $realtyObject->contact->id : old('contact_id')) == $id ? 'selected' : '' }}>{{ $contact }}</option>
+        @endforeach
+    </select>
+    @if($errors->has('contact_id'))
+        <p class="help-block">
+            {{ $errors->first('contact_id') }}
+        </p>
+    @endif
+</div>
+<div class="form-group {{ $errors->has('building_id') ? 'has-error' : '' }}">
+    <label for="building">{{ trans('cruds.realtyObject.fields.building') }}*</label>
+    <select name="building_id" id="building" class="form-control select2" required>
+        @foreach($buildings as $id => $building)
+            <option value="{{ $id }}" {{ (isset($realtyObject) && $realtyObject->building ? $realtyObject->building->id : old('building_id')) == $id ? 'selected' : '' }}>{{ $building }}</option>
+        @endforeach
+    </select>
+    @if($errors->has('building_id'))
+        <p class="help-block">
+            {{ $errors->first('building_id') }}
+        </p>
+    @endif
+</div>
 <div class="form-group {{ $errors->has('planned_contact') ? 'has-error' : '' }}">
     <label for="planned_contact">{{ trans('cruds.realtyObject.fields.planned_contact') }}</label>
     <input type="text" id="planned_contact" name="planned_contact" class="form-control date" value="{{ old('planned_contact', isset($realtyObject) ? $realtyObject->planned_contact : '') }}">
@@ -93,6 +119,20 @@ use App\RealtyObject;
         </p>
     @endif
 </div>
+<div class="form-group {{ $errors->has('currency') ? 'has-error' : '' }}">
+    <label for="currency">{{ trans('cruds.realtyObject.fields.currency') }}*</label>
+    <select id="currency" name="currency" class="form-control" required>
+        <option value="" disabled {{ old('currency', null) === null ? 'selected' : '' }}>{{ trans('global.pleaseSelect') }}</option>
+        @foreach(App\RealtyObject::CURS as $key => $label)
+            <option value="{{ $key }}" {{ old('currency', $realtyObject->currency) == $key ? 'selected' : '' }}>{{ $label }}</option>
+        @endforeach
+    </select>
+    @if($errors->has('currency'))
+        <p class="help-block">
+            {{ $errors->first('currency') }}
+        </p>
+    @endif
+</div>
 <div class="form-group {{ $errors->has('commission') ? 'has-error' : '' }}">
     <label for="commission">{{ trans('cruds.realtyObject.fields.commission') }}</label>
     <input type="number" id="commission" name="commission" class="form-control" value="{{ old('commission', isset($realtyObject) ? $realtyObject->commission : '') }}" step="0.1" max="500">
@@ -115,6 +155,30 @@ use App\RealtyObject;
     @endif
     <p class="helper-block">
         {{ trans('cruds.realtyObject.fields.description_helper') }}
+    </p>
+</div>
+<div class="form-group {{ $errors->has('bargain_limit') ? 'has-error' : '' }}">
+    <label for="cost">{{ trans('cruds.realtyObject.fields.bargain_limit') }}</label>
+    <input type="number" id="bargain_limit" name="bargain_limit" class="form-control" value="{{ old('bargain_limit', isset($realtyObject) ? $realtyObject->bargain_limit : '') }}">
+    @if($errors->has('bargain_limit'))
+        <p class="help-block">
+            {{ $errors->first('bargain_limit') }}
+        </p>
+    @endif
+    <p class="helper-block">
+        {{ trans('cruds.realtyObject.fields.bargain_limit_helper') }}
+    </p>
+</div>
+<div class="form-group {{ $errors->has('payback') ? 'has-error' : '' }}">
+    <label for="cost">{{ trans('cruds.realtyObject.fields.payback') }}</label>
+    <input type="number" id="payback" name="payback" class="form-control" value="{{ old('payback', isset($realtyObject) ? $realtyObject->payback : '') }}">
+    @if($errors->has('payback'))
+        <p class="help-block">
+            {{ $errors->first('payback') }}
+        </p>
+    @endif
+    <p class="helper-block">
+        {{ trans('cruds.realtyObject.fields.payback_helper') }}
     </p>
 </div>
 <div class="form-group {{ $errors->has('cost') ? 'has-error' : '' }}">
