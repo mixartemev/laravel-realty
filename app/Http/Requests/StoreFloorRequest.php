@@ -22,10 +22,6 @@ class StoreFloorRequest extends FormRequest
                 'min:1',
                 'max:100',
             ],
-            'building_id' => [
-                'required',
-                'integer',
-            ],
         ];
     }
 }

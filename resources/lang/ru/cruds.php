@@ -202,6 +202,8 @@ return [
             'bargain_limit_helper'   => '',
             'payback'                => 'Окупаемость',
             'payback_helper'         => '',
+            'currency'               => 'Валюта',
+            'currency_helper'        => '',
             'cost'                   => 'Стоимость',
             'cost_helper'            => '',
             'cost_m'                 => 'Стоимость кв.м',
