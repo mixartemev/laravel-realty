@@ -110,7 +110,7 @@
                         <a class="nav-link nav-dropdown-toggle">
                             <i class="fa-fw fas fa-home"></i>
                             <p>
-                                <span>{{ trans('cruds.realtyObject.title') }}</span>
+                                <span>{{ trans('cruds.realtyObject.title_objects') }}</span>
                                 <i class="right fa fa-fw fa-angle-left"></i>
                             </p>
                         </a>
