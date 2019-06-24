@@ -11,24 +11,21 @@ $contact = $realtyObject->contact;
     </div>
 
     <div class="card-body row">
-        <div>
-            <div id="gallery" class="carousel slide col-sm-5" data-ride="carousel">
+        <div class="col-sm-5">
+            <div id="gallery" class="carousel slide" data-ride="carousel">
                 <ol class="carousel-indicators">
-
-                    <li data-target="#gallery" data-slide-to="0" class=""></li>
-                    <li data-target="#gallery" data-slide-to="1" class="active"></li>
-                    <li data-target="#gallery" data-slide-to="2" class=""></li>
+                <?php foreach ($realtyObject->photos as $k => $photo) { ?>
+                    <li data-target="#gallery" data-slide-to="<?= $k ?>" <?= $k ? '' : 'class="active"' ?>></li>
+                <?php } ?>
                 </ol>
                 <div class="carousel-inner">
-                    <div class="carousel-item active carousel-item-left">
-                        <img class="d-block w-100" src="http://placehold.it/900x500/39CCCC/ffffff&amp;text=I+Love+Bootstrap" alt="First slide">
-                    </div>
-                    <div class="carousel-item carousel-item-next carousel-item-left">
-                        <img class="d-block w-100" src="http://placehold.it/900x500/3c8dbc/ffffff&amp;text=I+Love+Bootstrap" alt="Second slide">
-                    </div>
-                    <div class="carousel-item">
-                        <img class="d-block w-100" src="http://placehold.it/900x500/f39c12/ffffff&amp;text=I+Love+Bootstrap" alt="Third slide">
-                    </div>
+                    <?php foreach ($realtyObject->photos as $k => $photo) {
+                    /** @var \Spatie\MediaLibrary\Models\Media $photo */
+                    ?>
+                        <div class="carousel-item <?= $k ? '' : 'active' ?> carousel-item-left">
+                            <img class="d-block w-100" src="<?= $photo->url ?>" alt="<?= $photo->name ?>">
+                        </div>
+                    <?php } ?>
                 </div>
                 <a class="carousel-control-prev" href="#gallery" role="button" data-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -93,9 +90,7 @@ $contact = $realtyObject->contact;
             @endif
         </div>
 
-
         <div class="col-sm-7">
-
             <table class="table table-bordered table-striped">
                 <tbody>
                     <tr>
