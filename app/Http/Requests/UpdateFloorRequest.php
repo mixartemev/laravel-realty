@@ -2,26 +2,23 @@
 
 namespace App\Http\Requests;
 
-use App\Floor;
+use Gate;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateFloorRequest extends FormRequest
 {
     public function authorize()
     {
-        return \Gate::allows('floor_edit');
+        return Gate::allows('floor_edit');
     }
 
     public function rules()
     {
         return [
-            'number'      => [
-                'required',
-            ],
-            'ceiling'     => [
-                'min:1',
-                'max:100',
-            ],
+            'number' => ['required', 'min:-9', 'max:127'],
+            'type' => ['required', 'min:1', 'max:9'],
+            'realty_object_id' => ['required'],
+            'ceiling' => ['min:1', 'max:18'],
         ];
     }
 }
