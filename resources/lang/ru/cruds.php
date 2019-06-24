@@ -167,6 +167,7 @@ return [
         'fields'         => [],
     ],
     'realtyObject'   => [
+        'title_objects'          => 'Объекты',
         'title'          => 'Блоки',
         'title_singular' => 'Блок',
         'fields'         => [

@@ -106,7 +106,7 @@
                     </li>
                 @endcan
                 @can('realty_object_access')
-                    <li class="nav-item has-treeview {{ request()->is('admin/floors*') ? 'menu-open' : '' }} {{ request()->is('admin/realty-objects*') ? 'menu-open' : '' }}">
+                    <li class="nav-item has-treeview {{--{{ request()->is('admin/floors*') ? 'menu-open' : '' }} --}}{{ request()->is('admin/realty-objects*') ? 'menu-open' : '' }}">
                         <a class="nav-link nav-dropdown-toggle">
                             <i class="fa-fw fas fa-home"></i>
                             <p>
@@ -117,7 +117,7 @@
                         <ul class="nav nav-treeview">
                             @can('realty_object_access')
                                 <li class="nav-item">
-                                    <a href="{{ route("admin.realty-objects.index") }}" class="nav-link {{ request()->is('admin/realty-objects') || request()->is('admin/realty-objects/*') ? 'active' : '' }}">
+                                    <a href="{{ route("admin.realty-objects.index") }}" class="nav-link {{ request()->is('admin/realty-objects/*') ? 'active' : '' }}">
                                         <i class="fa-fw fab fa-buromobelexperte"></i>
                                         <p>
                                             <span>{{ trans('cruds.realtyObject.title') }}</span>
