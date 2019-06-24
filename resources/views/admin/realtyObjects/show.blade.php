@@ -10,8 +10,92 @@ $contact = $realtyObject->contact;
         {{ trans('cruds.realtyObject.title_singular') }}: {{ $realtyObject->id }}
     </div>
 
-    <div class="card-body">
+    <div class="card-body row">
         <div>
+            <div id="gallery" class="carousel slide col-sm-5" data-ride="carousel">
+                <ol class="carousel-indicators">
+
+                    <li data-target="#gallery" data-slide-to="0" class=""></li>
+                    <li data-target="#gallery" data-slide-to="1" class="active"></li>
+                    <li data-target="#gallery" data-slide-to="2" class=""></li>
+                </ol>
+                <div class="carousel-inner">
+                    <div class="carousel-item active carousel-item-left">
+                        <img class="d-block w-100" src="http://placehold.it/900x500/39CCCC/ffffff&amp;text=I+Love+Bootstrap" alt="First slide">
+                    </div>
+                    <div class="carousel-item carousel-item-next carousel-item-left">
+                        <img class="d-block w-100" src="http://placehold.it/900x500/3c8dbc/ffffff&amp;text=I+Love+Bootstrap" alt="Second slide">
+                    </div>
+                    <div class="carousel-item">
+                        <img class="d-block w-100" src="http://placehold.it/900x500/f39c12/ffffff&amp;text=I+Love+Bootstrap" alt="Third slide">
+                    </div>
+                </div>
+                <a class="carousel-control-prev" href="#gallery" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#gallery" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+
+            <br>
+
+            @if($floors = $realtyObject->floors)
+                <div class="card">
+                    <div class="card-header">
+                        {{ trans('cruds.floor.title') }}
+                    </div>
+
+                    <div class="card-body">
+                        @foreach ($floors as $floor)
+                            <div class="card">
+                                <div class="card-header">
+                                    {{ trans('cruds.floor.title_singular') }} #{{ $floor->number }}
+                                </div>
+
+                                <div class="card-body">
+                                    <h5></h5>
+                                    <table class="table table-bordered table-striped">
+                                        <tbody>
+                                        <tr>
+                                            <th>
+                                                {{ trans('cruds.floor.fields.type') }}
+                                            </th>
+                                            <td>
+                                                {{ \App\Floor::TYPES[$floor->type] }}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>
+                                                {{ trans('cruds.floor.fields.area') }}
+                                            </th>
+                                            <td>
+                                                {{ number_format($floor->area, 0, '.', ' ') }} м<sup>2</sup>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>
+                                                {{ trans('cruds.floor.fields.ceiling') }} м
+                                            </th>
+                                            <td>
+                                                {{ $floor->ceiling }}
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+            @endif
+        </div>
+
+
+        <div class="col-sm-7">
+
             <table class="table table-bordered table-striped">
                 <tbody>
                     <tr>
@@ -150,55 +234,7 @@ $contact = $realtyObject->contact;
                 </tbody>
             </table>
 
-            @if($floors = $realtyObject->floors)
-                <div class="card">
-                    <div class="card-header">
-                        {{ trans('cruds.floor.title') }}
-                    </div>
 
-                    <div class="card-body">
-                        @foreach ($floors as $floor)
-                            <div class="card">
-                                <div class="card-header">
-                                    {{ trans('cruds.floor.title_singular') }} #{{ $floor->number }}
-                                </div>
-
-                                <div class="card-body">
-                                    <h5></h5>
-                                    <table class="table table-bordered table-striped">
-                                        <tbody>
-                                        <tr>
-                                            <th>
-                                                {{ trans('cruds.floor.fields.type') }}
-                                            </th>
-                                            <td>
-                                                {{ \App\Floor::TYPES[$floor->type] }}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th>
-                                                {{ trans('cruds.floor.fields.area') }}
-                                            </th>
-                                            <td>
-                                                {{ number_format($floor->area, 0, '.', ' ') }} м<sup>2</sup>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th>
-                                                {{ trans('cruds.floor.fields.ceiling') }} м
-                                            </th>
-                                            <td>
-                                                {{ $floor->ceiling }}
-                                            </td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        @endforeach
-                    </div>
-                </div>
-            @endif
 
             @include ('admin.buildings.show_inner', ['building' => $realtyObject->building])
 
