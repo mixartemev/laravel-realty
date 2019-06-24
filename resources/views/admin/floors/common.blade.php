@@ -4,6 +4,7 @@
     </div>
 
     <div class="card-body">
+        <form></form>{{--dirty hack--}}
         @foreach ($realtyObject->floors as $id => $floor)
             @include('admin.floors.edit', ['floor' => $floor])
         @endforeach
