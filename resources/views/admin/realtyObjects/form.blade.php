@@ -234,8 +234,6 @@ use App\RealtyObject;
     </p>
 </div>
 
-@include('admin.floors.common', ['realtyObject' => $realtyObject])
-
 <div>
     <input class="btn btn-danger" type="submit" value="{{ trans('global.save') }}">
 </div>

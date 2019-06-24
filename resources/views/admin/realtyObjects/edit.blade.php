@@ -11,6 +11,9 @@
             @csrf
             @method('PUT')
             @include('admin.realtyObjects.form', ['realtyObject' => $realtyObject])
+        </form>
+        <br>
+        @include('admin.floors.common', ['realtyObject' => $realtyObject])
     </div>
 </div>
 @endsection

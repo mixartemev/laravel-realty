@@ -164,7 +164,7 @@ class RealtyObjectController extends Controller
             }
         }
 
-        return redirect()->route('admin.realty-objects.index');
+        return redirect()->back();
     }
 
     public function show(RealtyObject $realtyObject)
