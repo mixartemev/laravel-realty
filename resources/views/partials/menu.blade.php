@@ -125,7 +125,7 @@
                                     </a>
                                 </li>
                             @endcan
-                            @can('floor_access')
+                            {{--@can('floor_access')
                                 <li class="nav-item">
                                     <a href="{{ route("admin.floors.index") }}" class="nav-link {{ request()->is('admin/floors') || request()->is('admin/floors/*') ? 'active' : '' }}">
                                         <i class="fa-fw fas fa-stream"></i>
@@ -134,7 +134,7 @@
                                         </p>
                                     </a>
                                 </li>
-                            @endcan
+                            @endcan--}}
                         </ul>
                     </li>
                 @endcan
