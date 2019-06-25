@@ -210,7 +210,7 @@ $contact = $realtyObject->contact;
                         </th>
                         <td>
                             @foreach ($realtyObject->docs as $doc)
-                                <a href="<?= $doc->url ?>"><?= $doc->name ?></a>
+                                <a href="/storage/<?= $doc->id ?>/<?= $doc->file_name ?>" target="_blank"><?= $doc->file_name ?></a>
                                 <?= $loop->last ? '' : ',<br>' ?>
                             @endforeach
                         </td>
