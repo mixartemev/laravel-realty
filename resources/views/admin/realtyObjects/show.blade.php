@@ -89,6 +89,7 @@ $contact = $realtyObject->contact;
                     </div>
                 </div>
             @endif
+            <img class="w-100" src="/img/map.png">
         </div>
 
         <div class="col-sm-7">
@@ -195,20 +196,12 @@ $contact = $realtyObject->contact;
                             <?= number_format($realtyObject->cost, 0, '.', ' ').' '.RealtyObject::CURS[$realtyObject->currency] ?>
                         </td>
                     </tr>
-{{--                    <tr>--}}
-{{--                        <th>--}}
-{{--                            {{ trans('cruds.realtyObject.fields.cost_m') }}--}}
-{{--                        </th>--}}
-{{--                        <td>--}}
-{{--                            ${{ $realtyObject->cost_m }}--}}
-{{--                        </td>--}}
-{{--                    </tr>--}}
                     <tr>
                         <th>
-                            {{ trans('cruds.realtyObject.fields.photos') }}
+                            {{ trans('cruds.realtyObject.fields.cost_m') }}
                         </th>
                         <td>
-                            {{ $realtyObject->photos }}
+                            {{ $realtyObject->getCostM().' '.RealtyObject::CURS[$realtyObject->currency] }}
                         </td>
                     </tr>
                     <tr>
@@ -216,7 +209,10 @@ $contact = $realtyObject->contact;
                             {{ trans('cruds.realtyObject.fields.docs') }}
                         </th>
                         <td>
-                            {{ $realtyObject->docs }}
+                            @foreach ($realtyObject->docs as $doc)
+                                <a href="<?= $doc->url ?>"><?= $doc->name ?></a>
+                                <?= $loop->last ? '' : ',<br>' ?>
+                            @endforeach
                         </td>
                     </tr>
                     <tr>
