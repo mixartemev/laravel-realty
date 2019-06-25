@@ -2,6 +2,7 @@
 @section('content')
 <?php
 use App\RealtyObject;
+use Spatie\MediaLibrary\Models\Media;
 /** @var RealtyObject $realtyObject */
 $contact = $realtyObject->contact;
 ?>
@@ -20,9 +21,9 @@ $contact = $realtyObject->contact;
                 </ol>
                 <div class="carousel-inner">
                     <?php foreach ($realtyObject->photos as $k => $photo) {
-                    /** @var \Spatie\MediaLibrary\Models\Media $photo */
+                    /** @var Media $photo */
                     ?>
-                        <div class="carousel-item <?= $k ? '' : 'active' ?> carousel-item-left">
+                        <div class="carousel-item <?= $k ? '' : 'active' ?>">
                             <img class="d-block w-100" src="<?= $photo->url ?>" alt="<?= $photo->name ?>">
                         </div>
                     <?php } ?>
