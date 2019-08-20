@@ -14,7 +14,7 @@ $factory->define(RealtyObject::class, function (Faker $faker) {
     $dealType = $faker->randomElement([1,2,3]);
     $cost = ($cur>1?1:70)*($dealType==1?1:100)*50000;
     return [
-        'planned_contact' => $faker->date(),
+        'planned_contact' => $faker->date('d.m.Y'),
         'created_at' => $faker->dateTimeThisMonth,
         'currency' => $cur,
         'cost' => $faker->numberBetween($cost*0.5, $cost*5),

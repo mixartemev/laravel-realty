@@ -20,7 +20,7 @@ $factory->define(Building::class, function (Faker $faker) {
         'metro_distance' => $metroStation ? $faker->numberBetween(0, 60) : null,
         'metro_distance_type' => $metroStation ? $faker->randomElement([1,2]) : null,
         'region_id' => $faker->randomElement([1,2,3,4,5,6,7,8,9,11,12,13,14,15,16,17,18,19,20]),
-        'release_date' => $faker->randomElement([$faker->date('Y-m-d', '2029-01-13'), null]),
+        'release_date' => $faker->randomElement([$faker->date('d.m.Y', '2029-01-13'), null]),
         'description' => $faker->realText(),
     ];
 });
